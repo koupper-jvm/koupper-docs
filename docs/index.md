@@ -1,14 +1,8 @@
 ---
 layout: home
-title: Bienvenido a Koupper
+title: Simplify Your Automation
 ---
 
-# Bienvenido a Koupper
+# Simplify Your Automation
 
-Este es el contenido de la página de inicio. Aquí va toda la información sobre Koupper.
-
-<div class="custom-title">Título Personalizado</div>
-<p class="custom-text">Este es un párrafo con estilo personalizado.</p>
-
-<!-- También puedes agregar componentes Vue si lo necesitas -->
-<YourVueComponent />
+Koupper is a versatile script-Kotlin framework built to streamline automation and integration processes. With an emphasis on modular architecture and optimized performance, Koupper provides a solid foundation for creating efficient and adaptable automation solutions. Its flexible design allows for seamless integration across various environments, making it an ideal choice for projects requiring both reliability and scalability.
