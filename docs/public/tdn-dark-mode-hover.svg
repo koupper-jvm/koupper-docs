@@ -1,5 +1,4 @@
 <svg width="170" height="172" viewBox="0 0 170 172" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g opacity="0.5">
 <mask id="mask0_11_1405" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="40" y="17" width="90" height="90">
 <path d="M40.9771 17.2H129.037V106.296H40.9771V17.2Z" fill="white"/>
 </mask>
@@ -30,7 +29,6 @@
 <path d="M14.3455 114.814H11.8291V108.878H10.0123V107.459H16.1287V108.878H14.3455V114.814Z" fill="white"/>
 <path d="M20.3504 111.845H19.2684V114.814H16.7521V107.459H19.2684V110.428H20.3504V107.459H22.8685V114.814H20.3504V111.845Z" fill="white"/>
 <path d="M26.0065 113.393H29.6066V114.814H23.4901V107.459H29.6083V108.88H26.0082V110.426H29.6083V111.845H26.0082L26.0065 113.393Z" fill="white"/>
-</g>
 <defs>
 <pattern id="pattern0_11_1405" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0_11_1405" transform="scale(0.000740741)"/>
