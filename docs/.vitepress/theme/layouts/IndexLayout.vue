@@ -3,7 +3,6 @@ import { ref, onMounted, watch } from "vue";
 import { useData } from "vitepress";
 import { minimalSetup, EditorView } from "codemirror";
 import { EditorState } from "@codemirror/state";
-import { oneDark } from "@codemirror/theme-one-dark";
 import { espresso, dracula } from "thememirror";
 import { java } from "@codemirror/lang-java";
 
