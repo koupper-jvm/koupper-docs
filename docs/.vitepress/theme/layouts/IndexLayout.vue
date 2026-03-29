@@ -5,12 +5,16 @@ import { minimalSetup, EditorView } from "codemirror";
 import { EditorState } from "@codemirror/state";
 import { espresso, dracula } from "thememirror";
 import { java } from "@codemirror/lang-java";
+import axios from 'axios';
+import "./../custom.css";
+import HAWSW from './HAWSW.vue';
+import FooterPart from './Footer.vue';
 
 const { page, frontmatter } = useData();
 const isDarkMode = ref(false);
 const darkEditorContainer = ref(null);
 const lightEditorContainer = ref(null);
-const installCommand = ref("kotlinc koupper-installer.kts");
+const installCommand = ref("kotlinc -script koupper-installer.kts");
 const versionCommand = ref("koupper -v");
 const newCommand = ref("koupper new example.kts");
 const runCommand = ref("koupper run example.kts");
@@ -35,20 +39,29 @@ const isIglyActive = ref(false);
 const isDarkIglyActive = ref(false);
 const isQuizteaActive = ref(false);
 const isDarkQuizteaActive = ref(false);
+const initialText = `
+import com.koupper.container.interfaces.Container
+
+val execute: () -> String = { 
+    "Hello world!"
+}
+`;
 
 const getExtensions = (darkMode) => {
   return [minimalSetup, darkMode ? dracula : espresso, java()];
 };
 
 function toggleDarkMode() {
-  document.documentElement.classList.toggle("dark", isDarkMode.value);
+  if (typeof document !== "undefined") {
+    document.documentElement.classList.toggle("dark", isDarkMode.value);
 
-  if (isDarkMode.value) {
-    document.body.style.backgroundColor = "#121212";
-    document.body.style.color = "#FFFFFF";
-  } else {
-    document.body.style.backgroundColor = "";
-    document.body.style.color = "";
+    if (isDarkMode.value) {
+      document.body.style.backgroundColor = "#121212";
+      document.body.style.color = "#FFFFFF";
+    } else {
+      document.body.style.backgroundColor = "";
+      document.body.style.color = "";
+    }
   }
 }
 
@@ -76,7 +89,24 @@ function copyRunCommand() {
 function executeTry() {
   isLoading.value = true;
 
-  result.value = "Hello world!";
+  const url = 'https://tp3sv4oekh.execute-api.us-east-2.amazonaws.com/Production/execute';
+  const data = null;
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    withCredentials: false,
+  };
+
+  axios.post(url, data, config)
+    .then(response => {
+      result.value = response.data;
+      isLoading.value = false;
+    })
+    .catch(error => {
+      console.error('Error en la petición:', error);
+    });
 }
 
 function hoverTdn() {
@@ -168,22 +198,15 @@ async function copyToClipboard(text) {
 }
 
 onMounted(() => {
-  isDarkMode.value = document.documentElement.classList.contains("dark");
+  if (typeof document !== "undefined") {
+    isDarkMode.value = document.documentElement.classList.contains("dark");
+    document.documentElement.classList.toggle("dark", isDarkMode.value);
 
-  document.documentElement.classList.toggle("dark", isDarkMode.value);
-
-  if (isDarkMode.value) {
-    document.body.style.backgroundColor = "#121212";
-    document.body.style.color = "#FFFFFF";
+    if (isDarkMode.value) {
+      document.body.style.backgroundColor = "#121212";
+      document.body.style.color = "#FFFFFF";
+    }
   }
-
-  const initialText = `
-import com.koupper.container.interfaces.Container
-
-val execute: () -> String = { 
-    "Hello world!"
-}
-`;
 
   editorDark.value = new EditorView({
     state: EditorState.create({
@@ -203,31 +226,42 @@ val execute: () -> String = {
 });
 
 watch(isDarkMode, (newVal) => {
-  document.documentElement.classList.toggle("dark", newVal);
-  if (newVal) {
-    document.body.style.backgroundColor = "#121212";
-    document.body.style.color = "#FFFFFF";
-  } else {
-    document.body.style.backgroundColor = "";
-    document.body.style.color = "";
+  if (typeof document !== "undefined") {
+    document.documentElement.classList.toggle("dark", newVal);
+    if (newVal) {
+      document.body.style.backgroundColor = "#121212";
+      document.body.style.color = "#FFFFFF";
+    } else {
+      document.body.style.backgroundColor = "";
+      document.body.style.color = "";
+    }
   }
 });
+
+function navigateTo(path) {
+  window.location.href = path;
+}
 </script>
 
 <template>
-  <div class="d-flex justify-content-center fixed-top">
-    <nav class="custom-navbar px-3 py-3 w-75">
-      <div class="px-4">
-        <img v-if="isDarkMode" src="/koupper-logo.svg" alt="Logo" />
-        <img v-else src="/koupper-white-mode-logo.svg" alt="Logo" />
+  <div class="container-custom-navbar d-flex justify-content-center fixed-top">
+    <nav class="custom-navbar px-3 py-3">
+      <div class="px-1">
+        <a href="/">
+          <img class="koupper-logo" v-if="isDarkMode" src="/koupper-logo.svg" alt="Logo" />
+          <img class="koupper-logo" v-else src="/koupper-white-mode-logo.svg" alt="Logo" />
+        </a>
       </div>
       <div class="d-flex align-items-center">
-        <div class="px-3 me-3">
-          <button :class="{ 'doc-btn-white-mode': !isDarkMode, 'doc-btn': isDarkMode }" class="btn">
+        <div class="px-1">
+          <button :class="{ 'doc-btn-white-mode': !isDarkMode, 'doc-btn': isDarkMode }" class="btn btn-doc">
             Documentation
           </button>
+          <button class="btn icon-doc">
+            <img src="/doc-icon.svg" alt="">
+          </button>
         </div>
-        <div>
+        <div class="px-1">
           <label class="switch">
             <input type="checkbox" v-model="isDarkMode" @change="toggleDarkMode" />
             <span class="slider">
@@ -239,19 +273,18 @@ watch(isDarkMode, (newVal) => {
       </div>
     </nav>
   </div>
-
   <div v-if="page.isNotFound">Custom 404 page!</div>
-
   <div v-if="frontmatter.layout === 'home'" class="mt-5">
     <div class="container d-flex justify-content-center">
-      <div class="w-75">
+      <div class="main-container">
         <Content class="mt-5 pt-4" />
         <div class="d-flex justify-content-start mt-4">
-          <button class="btn download-btn text-white">Download koupper installer</button>
+          <a href="https://koupper.s3.us-east-2.amazonaws.com/cli/koupper-installer.kts"
+            class="btn download-btn text-white">Download koupper installer</a>
         </div>
         <div class="pt-3">
           <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-md-12 col-lg-6">
               <div class="mt-5">
                 <h4>Installation and Setup</h4>
                 <ul class="list-unstyled mt-5">
@@ -334,7 +367,7 @@ watch(isDarkMode, (newVal) => {
                 </ul>
               </div>
             </div>
-            <div class="col-6 d-flex flex-column justify-content-center">
+            <div class="col-12 col-md-12 col-lg-6 d-flex flex-column justify-content-center">
               <span>example.kts</span>
               <div v-show="isDarkMode" class="mt-2">
                 <div id="editor-dark" ref="darkEditorContainer"></div>
@@ -342,7 +375,10 @@ watch(isDarkMode, (newVal) => {
               <div v-show="!isDarkMode" class="mt-2">
                 <div id="editor-light" ref="lightEditorContainer"></div>
               </div>
-              <div class="w-100 d-flex justify-content-end mt-3">
+              <div class="w-100 d-flex justify-content-between mt-2">
+                <div class="more-about-web-scripts" @click="navigateTo('/how-a-web-script-works')" role="button">
+                  <span class="hover-underline">How is the script executed?</span>
+                </div>
                 <button class="btn d-flex justify-content-center align-items-center try-it-white-mode"
                   @click="executeTry" :disabled="isLoading">
                   <span v-if="!isLoading">¡Try it!</span>
@@ -361,8 +397,8 @@ watch(isDarkMode, (newVal) => {
         </div>
         <div class="mt-5">
           <h4>Integrations:</h4>
-          <div class="row mt-5">
-            <div class="col-6">
+          <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 mt-3">
               <div :class="{ 'web-integration': isDarkMode, 'web-integration-light-mode': !isDarkMode }"
                 class="d-flex flex-column p-3 pointer">
                 <img src="/web.svg" alt="" width="35" height="35" />
@@ -373,7 +409,7 @@ watch(isDarkMode, (newVal) => {
                 </p>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-12 col-lg-6 mt-3">
               <div :class="{ 'db-integration': isDarkMode, 'db-integration-light-mode': !isDarkMode }"
                 class="d-flex flex-column p-3 pointer">
                 <img src="/database.svg" alt="" width="35" height="35" />
@@ -385,8 +421,8 @@ watch(isDarkMode, (newVal) => {
               </div>
             </div>
           </div>
-          <div class="row mt-3">
-            <div class="col-6">
+          <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 mt-3">
               <div :class="{ 'aws-integration': isDarkMode, 'aws-integration-light-mode': !isDarkMode }"
                 class="d-flex flex-column p-3 pointer">
                 <img src="/aws.svg" alt="" width="46" height="35" />
@@ -397,7 +433,7 @@ watch(isDarkMode, (newVal) => {
                 </p>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-12 col-lg-6 mt-3">
               <div :class="{ 'docker-integration': isDarkMode, 'docker-integration-light-mode': !isDarkMode }"
                 class="d-flex flex-column p-3 pointer">
                 <img src="/docker.svg" alt="" width="35" height="35" />
@@ -412,70 +448,71 @@ watch(isDarkMode, (newVal) => {
         </div>
         <div class="mt-5">
           <h4>Used by:</h4>
-          <div class="row mt-5">
-            <div class="col d-flex justify-content-center align-items-center">
-              <img v-if="isDarkMode & !isDarkTdnActive" src="/tdn.svg" alt="" width="120" height="120" class="p-2"
+          <div class="row mt-5 text-center image-scroll-container">
+            <div class="col-6 col-md d-flex justify-content-center align-items-center mb-4 mb-md-0">
+              <img v-if="isDarkMode & !isDarkTdnActive" src="/tdn.svg" alt="" class="p-2 img-fluid"
                 @mouseover="hoverDarkTdn" @mouseleave="hoverLeaveDarkTdn" />
-              <img v-if="!isDarkMode & !isTdnActive" src="/tdn-light-mode.svg" alt="" width="120" height="120"
-                class="p-2" @mouseover="hoverTdn" @mouseleave="hoverLeaveTdn" />
-              <img v-if="!isDarkMode & isTdnActive" src="/tdn-light-mode-hover.svg" alt="" width="120" height="120"
-                class="p-2 pointer" @mouseover="hoverTdn" @mouseleave="hoverLeaveTdn" />
-              <img v-if="isDarkMode & isDarkTdnActive" src="/tdn-dark-mode-hover.svg" alt="" width="120" height="120"
-                class="p-2 pointer" @mouseover="hoverDarkTdn" @mouseleave="hoverLeaveDarkTdn" />
+              <img v-if="!isDarkMode & !isTdnActive" src="/tdn-light-mode.svg" alt="" class="p-2 img-fluid"
+                @mouseover="hoverTdn" @mouseleave="hoverLeaveTdn" />
+              <img v-if="!isDarkMode & isTdnActive" src="/tdn-light-mode-hover.svg" alt="" class="p-2 img-fluid pointer"
+                @mouseover="hoverTdn" @mouseleave="hoverLeaveTdn" />
+              <img v-if="isDarkMode & isDarkTdnActive" src="/tdn-dark-mode-hover.svg" alt=""
+                class="p-2 img-fluid pointer" @mouseover="hoverDarkTdn" @mouseleave="hoverLeaveDarkTdn" />
             </div>
-            <div class="col d-flex justify-content-center align-items-center">
-              <img v-if="isDarkMode & !isDarkZtreamersActive" src="/ztreamers.svg" alt="" width="120" height="120"
-                class="p-2" @mouseover="hoverDarkZtreamers" @mouseleave="hoverLeaveDarkZtreamers" />
-              <img v-if="!isDarkMode & !isZtreamersActive" src="/ztreamers-light-mode.svg" alt="" width="120"
-                height="120" class="p-2" @mouseover="hoverZtreamers" @mouseleave="hoverLeaveZtreamers" />
-              <img v-if="!isDarkMode & isZtreamersActive" src="/ztreamers-light-mode-hover.svg" alt="" width="120"
-                height="120" class="p-2 pointer" @mouseover="hoverZtreamers" @mouseleave="hoverLeaveZtreamers" />
-              <img v-if="isDarkMode & isDarkZtreamersActive" src="/ztreamers-dark-mode-hover.svg" alt="" width="120"
-                height="120" class="p-2 pointer" @mouseover="hoverDarkZtreamers"
-                @mouseleave="hoverLeaveDarkZtreamers" />
+
+            <div class="col-6 col-md d-flex justify-content-center align-items-center mb-4 mb-md-0">
+              <img v-if="isDarkMode & !isDarkZtreamersActive" src="/ztreamers.svg" alt="" class="p-2 img-fluid"
+                @mouseover="hoverDarkZtreamers" @mouseleave="hoverLeaveDarkZtreamers" />
+              <img v-if="!isDarkMode & !isZtreamersActive" src="/ztreamers-light-mode.svg" alt="" class="p-2 img-fluid"
+                @mouseover="hoverZtreamers" @mouseleave="hoverLeaveZtreamers" />
+              <img v-if="!isDarkMode & isZtreamersActive" src="/ztreamers-light-mode-hover.svg" alt=""
+                class="p-2 img-fluid pointer" @mouseover="hoverZtreamers" @mouseleave="hoverLeaveZtreamers" />
+              <img v-if="isDarkMode & isDarkZtreamersActive" src="/ztreamers-dark-mode-hover.svg" alt=""
+                class="p-2 img-fluid pointer" @mouseover="hoverDarkZtreamers" @mouseleave="hoverLeaveDarkZtreamers" />
             </div>
-            <div class="col d-flex justify-content-center align-items-center">
-              <img v-if="isDarkMode & !isDarkMediaFlowActive" src="/mediaflow.svg" alt="" width="120" height="120"
-                class="p-2" @mouseover="hoverDarkMediaFlow" @mouseleave="hoverLeaveDarkMediaFlow" />
-              <img v-if="!isDarkMode & !isMediaFlowActive" src="/mediaflow-light-mode.svg" alt="" width="120"
-                height="120" class="p-2" @mouseover="hoverMediaFlow" @mouseleave="hoverLeaveMediaFlow" />
-              <img v-if="!isDarkMode & isMediaFlowActive" src="/mediaflow-light-mode-hover.svg" alt="" width="120"
-                height="120" class="p-2 pointer" @mouseover="hoverMediaFlow" @mouseleave="hoverLeaveMediaFlow" />
-              <img v-if="isDarkMode & isDarkMediaFlowActive" src="/mediaflow-dark-mode-hover.svg" alt="" width="120"
-                height="120" class="p-2 pointer" @mouseover="hoverDarkMediaFlow"
-                @mouseleave="hoverLeaveDarkMediaFlow" />
+
+            <div class="col-6 col-md d-flex justify-content-center align-items-center mb-4 mb-md-0">
+              <img v-if="isDarkMode & !isDarkMediaFlowActive" src="/mediaflow.svg" alt="" class="p-2 img-fluid"
+                @mouseover="hoverDarkMediaFlow" @mouseleave="hoverLeaveDarkMediaFlow" />
+              <img v-if="!isDarkMode & !isMediaFlowActive" src="/mediaflow-light-mode.svg" alt="" class="p-2 img-fluid"
+                @mouseover="hoverMediaFlow" @mouseleave="hoverLeaveMediaFlow" />
+              <img v-if="!isDarkMode & isMediaFlowActive" src="/mediaflow-light-mode-hover.svg" alt=""
+                class="p-2 img-fluid pointer" @mouseover="hoverMediaFlow" @mouseleave="hoverLeaveMediaFlow" />
+              <img v-if="isDarkMode & isDarkMediaFlowActive" src="/mediaflow-dark-mode-hover.svg" alt=""
+                class="p-2 img-fluid pointer" @mouseover="hoverDarkMediaFlow" @mouseleave="hoverLeaveDarkMediaFlow" />
             </div>
-            <div class="col d-flex justify-content-center align-items-center">
-              <img v-if="isDarkMode & !isDarkIglyActive" src="/igly.svg" alt="" width="120" height="120" class="p-2"
+
+            <div class="col-6 col-md d-flex justify-content-center align-items-center mb-4 mb-md-0">
+              <img v-if="isDarkMode & !isDarkIglyActive" src="/igly.svg" alt="" class="p-2 img-fluid"
                 @mouseover="hoverDarkIgly" @mouseleave="hoverLeaveDarkIgly" />
-              <img v-if="!isDarkMode & !isIglyActive" src="/igly-light-mode.svg" alt="" width="120" height="120"
-                class="p-2" @mouseover="hoverIgly" @mouseleave="hoverLeaveIgly" />
-              <img v-if="!isDarkMode & isIglyActive" src="/igly-light-mode-hover.svg" alt="" width="120" height="120"
-                class="p-2 pointer" @mouseover="hoverIgly" @mouseleave="hoverLeaveIgly" />
-              <img v-if="isDarkMode & isDarkIglyActive" src="/igly-dark-mode-hover.svg" alt="" width="120" height="120"
-                class="p-2 pointer" @mouseover="hoverDarkIgly" @mouseleave="hoverLeaveDarkIgly" />
+              <img v-if="!isDarkMode & !isIglyActive" src="/igly-light-mode.svg" alt="" class="p-2 img-fluid"
+                @mouseover="hoverIgly" @mouseleave="hoverLeaveIgly" />
+              <img v-if="!isDarkMode & isIglyActive" src="/igly-light-mode-hover.svg" alt=""
+                class="p-2 img-fluid pointer" @mouseover="hoverIgly" @mouseleave="hoverLeaveIgly" />
+              <img v-if="isDarkMode & isDarkIglyActive" src="/igly-dark-mode-hover.svg" alt=""
+                class="p-2 img-fluid pointer" @mouseover="hoverDarkIgly" @mouseleave="hoverLeaveDarkIgly" />
             </div>
-            <div class="col d-flex justify-content-center align-items-center">
-              <img v-if="isDarkMode & !isDarkQuizteaActive" src="/quiztea.svg" alt="" width="120" height="120"
-                class="p-2" @mouseover="hoverDarkQuiztea" @mouseleave="hoverLeaveDarkQuiztea" />
-              <img v-if="!isDarkMode & !isQuizteaActive" src="/quiztea-light-mode.svg" alt="" width="120" height="120"
-                class="p-2" @mouseover="hoverQuiztea" @mouseleave="hoverLeaveQuiztea" />
-              <img v-if="!isDarkMode & isQuizteaActive" src="/quiztea-light-mode-hover.svg" alt="" width="120"
-                height="120" class="p-2 pointer" @mouseover="hoverQuiztea" @mouseleave="hoverLeaveQuiztea" />
-              <img v-if="isDarkMode & isDarkQuizteaActive" src="/quiztea-dark-mode-hover.svg" alt="" width="120"
-                height="120" class="p-2 pointer" @mouseover="hoverDarkQuiztea" @mouseleave="hoverLeaveDarkQuiztea" />
+
+            <div class="col-6 col-md d-flex justify-content-center align-items-center mb-4 mb-md-0">
+              <img v-if="isDarkMode & !isDarkQuizteaActive" src="/quiztea.svg" alt="" class="p-2 img-fluid"
+                @mouseover="hoverDarkQuiztea" @mouseleave="hoverLeaveDarkQuiztea" />
+              <img v-if="!isDarkMode & !isQuizteaActive" src="/quiztea-light-mode.svg" alt="" class="p-2 img-fluid"
+                @mouseover="hoverQuiztea" @mouseleave="hoverLeaveQuiztea" />
+              <img v-if="!isDarkMode & isQuizteaActive" src="/quiztea-light-mode-hover.svg" alt=""
+                class="p-2 img-fluid pointer" @mouseover="hoverQuiztea" @mouseleave="hoverLeaveQuiztea" />
+              <img v-if="isDarkMode & isDarkQuizteaActive" src="/quiztea-dark-mode-hover.svg" alt=""
+                class="p-2 img-fluid pointer" @mouseover="hoverDarkQuiztea" @mouseleave="hoverLeaveDarkQuiztea" />
             </div>
           </div>
-        </div>
-        <div class="footer d-flex justify-content-center py-5">
-          <img v-if="isDarkMode" src="/koupper-footer.svg" alt="" width="90" height="90" />
-          <img v-else src="/koupper-footer-white-mode.svg" alt="" width="90" height="90" />
+
         </div>
       </div>
     </div>
   </div>
-
-  <Content v-else />
+  <div v-else-if="frontmatter.layout === 'how-a-web-script-works'" class="mt-5">
+    <HAWSW :isDarkMode="isDarkMode" />
+  </div>
+  <FooterPart :isDarkMode="isDarkMode" />
 </template>
 
 <style scoped>
@@ -490,7 +527,7 @@ watch(isDarkMode, (newVal) => {
 .switch {
   position: relative;
   display: inline-block;
-  width: 70px;
+  width: 67px;
   height: 34px;
   margin-left: auto;
 }
@@ -517,7 +554,7 @@ watch(isDarkMode, (newVal) => {
   content: "";
   position: absolute;
   top: 4px;
-  left: 4px;
+  left: 2px;
   width: 26px;
   height: 26px;
   border-radius: 50%;
@@ -556,6 +593,7 @@ input:checked+.slider::before {
   background-color: rgb(0, 0, 0);
 }
 
+.dark .container-custom-navbar,
 .dark .custom-navbar {
   background-color: #121212;
   color: #fff;
@@ -750,5 +788,46 @@ input:checked+.slider::before {
   height: 40px;
   background-color: #6964ff;
   color: rgb(255, 255, 255);
+}
+
+.more-about-web-script a {
+  color: #6964ff;
+}
+
+.hover-underline {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hover-underline:hover,
+.hover-underline:focus {
+  text-decoration: underline;
+}
+
+.image-scroll-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.image-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.image-scroll-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (max-width: 768px) {
+  .image-scroll-container {
+    overflow-x: auto;
+  }
+
+  .img-fluid {
+    width: 120px;
+    height: auto;
+  }
 }
 </style>

@@ -1,38 +1,60 @@
 module.exports = {
   title: "Koupper",
-  description: "The functional kotlin framework",
+  description: "Event-driven Kotlin runtime + CLI for production scripting",
+  head: [
+    ["link", { rel: "icon", href: "/koupper-logo.svg" }],
+  ],
   themeConfig: {
     logo: "/koupper-logo.svg",
-    siteTitle: "Koupper",
+    siteTitle: "Koupper Docs",
     nav: [
-      { text: "Blog", link: "/about" },
-      { text: "Documentation", link: "/contact" },
+      { text: "Guide", link: "/getting-started" },
+      { text: "Architecture", link: "/how-a-web-script-works" },
+      { text: "GitHub", link: "https://github.com/koupper-jvm/koupper" },
     ],
+    socialLinks: [
+      { icon: "github", link: "https://github.com/koupper-jvm/koupper" },
+    ],
+    footer: {
+      message: "Built with Koupper and VitePress",
+      copyright: "Copyright © 2026 Koupper",
+    },
     sidebar: [
       {
-        text: "Section A",
-        collapsible: true,
+        text: "Start Here",
         items: [
-          { text: "Introduction", link: "/introduction" },
           { text: "Getting Started", link: "/getting-started" },
+          { text: "Quick Smoke", link: "/examples/quick-smoke" },
         ],
       },
       {
-        text: "Section B",
-        collapsible: false,
+        text: "Core Commands",
         items: [
-          { text: "Introduction", link: "/introduction" },
-          { text: "Getting Started", link: "/getting-started" },
+          { text: "run", link: "/commands/run" },
+          { text: "new", link: "/commands/new" },
+          { text: "module", link: "/commands/module" },
+          { text: "job", link: "/commands/job" },
+          { text: "deploy", link: "/commands/deploy" },
         ],
       },
       {
-        text: "Section C",
-        collapsible: true,
+        text: "Architecture",
         items: [
-          { text: "Introduction", link: "/introduction" },
-          { text: "Getting Started", link: "/getting-started" },
+          { text: "How a Web Script Works", link: "/how-a-web-script-works" },
+          { text: "Local-first Scaffolding", link: "/architecture/local-first-scaffolding" },
+        ],
+      },
+      {
+        text: "Production",
+        items: [
+          { text: "Hardening Guide", link: "/production/hardening" },
+          { text: "Release Workflow", link: "/production/release-workflow" },
+          { text: "Troubleshooting", link: "/production/troubleshooting" },
         ],
       },
     ],
+    search: {
+      provider: "local",
+    },
   },
 };
