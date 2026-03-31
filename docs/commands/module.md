@@ -10,6 +10,8 @@ koupper module demo-script
 
 This reports module details, script artifacts, and detected runtime dependencies.
 
+Handler analysis includes both `KHandler` implementations and AWS `RequestHandler` implementations found under `handlers` source directories, with separate counts in the module summary.
+
 ## Add scripts to existing module
 
 ```bash
