@@ -47,3 +47,9 @@ koupper run examples/github-provider-flow.kts --json-file examples/github-provid
 - Keep operation plans in JSON (`--json-file`) instead of inline strings.
 - Use one script with multiple actions and change only the input payload.
 - Pair with CI policy gates (`fast checks` + optional full smoke) for reliable automation.
+
+## Integration flow docs
+
+For full multi-repo orchestration concepts and staged flow templates:
+
+- [GitHub Integration Flow](/automation/github-integration-flow)
