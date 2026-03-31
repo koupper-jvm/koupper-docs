@@ -28,6 +28,7 @@ koupper provider info <name>
 | [`aws-dynamo`](/providers/aws-dynamo) | `AwsServiceProvider` | DynamoDB data access provider. |
 | [`aws-s3`](/providers/aws-s3) | `AwsS3ServiceProvider` | S3 storage provider for uploads and presigned flows. |
 | [`hashing`](/providers/hashing) | `HasherServiceProvider` | Password hashing and verification utilities. |
+| [`terminal`](/providers/terminal) | `TerminalRuntime` | Interactive terminal IO bridge for prompt/print during script execution. |
 | [`github`](/providers/github) | `GitHubServiceProvider` | GitHub API operations for issues, pull requests, checks and workflows. |
 | [`ai`](/providers/ai) | `AIServiceProvider` | AI model integration provider (OpenAI by default). |
 | [`templates`](/providers/templates) | `TemplateServiceProvider` | Template rendering provider. |
@@ -45,6 +46,7 @@ koupper provider info <name>
 - [AWS Dynamo Provider](/providers/aws-dynamo)
 - [AWS S3 Provider](/providers/aws-s3)
 - [Hashing Provider](/providers/hashing)
+- [Terminal Runtime](/providers/terminal)
 - [GitHub Provider](/providers/github)
 - [AI Provider](/providers/ai)
 - [Templates Provider](/providers/templates)
