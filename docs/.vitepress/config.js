@@ -35,6 +35,14 @@ module.exports = {
           { text: "module", link: "/commands/module" },
           { text: "job", link: "/commands/job" },
           { text: "deploy", link: "/commands/deploy" },
+          { text: "provider", link: "/commands/provider" },
+        ],
+      },
+      {
+        text: "Providers",
+        items: [
+          { text: "Catalog", link: "/providers" },
+          { text: "GitHub Provider", link: "/providers/github" },
         ],
       },
       {
