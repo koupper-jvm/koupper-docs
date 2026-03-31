@@ -46,6 +46,12 @@ module.exports = {
         ],
       },
       {
+        text: "Automation",
+        items: [
+          { text: "GitHub Integration Flow", link: "/automation/github-integration-flow" },
+        ],
+      },
+      {
         text: "Architecture",
         items: [
           { text: "How a Web Script Works", link: "/how-a-web-script-works" },
