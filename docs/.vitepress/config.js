@@ -41,7 +41,7 @@ module.exports = {
       {
         text: "Providers",
         items: [
-          { text: "Catalog", link: "/providers" },
+          { text: "Catalog", link: "/providers/" },
           { text: "db", link: "/providers/db" },
           { text: "mailing", link: "/providers/mailing" },
           { text: "logger", link: "/providers/logger" },
