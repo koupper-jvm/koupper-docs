@@ -43,3 +43,8 @@ Returns provider details:
 ```bash
 kotlinc -script install.kts -- --force
 ```
+
+## Reference pages
+
+- Full provider catalog: [/providers/](/providers/)
+- GitHub automation provider: [/providers/github](/providers/github)
