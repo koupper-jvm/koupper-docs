@@ -48,3 +48,4 @@ kotlinc -script install.kts -- --force
 
 - Full provider catalog: [/providers/](/providers/)
 - GitHub automation provider: [/providers/github](/providers/github)
+- Terminal runtime capability: [/providers/terminal](/providers/terminal)

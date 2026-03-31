@@ -52,6 +52,7 @@ module.exports = {
           { text: "aws-dynamo", link: "/providers/aws-dynamo" },
           { text: "aws-s3", link: "/providers/aws-s3" },
           { text: "hashing", link: "/providers/hashing" },
+          { text: "terminal", link: "/providers/terminal" },
           { text: "GitHub Provider", link: "/providers/github" },
           { text: "ai", link: "/providers/ai" },
           { text: "templates", link: "/providers/templates" },
