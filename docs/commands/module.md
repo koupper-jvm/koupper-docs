@@ -16,6 +16,8 @@ During analysis, Koupper also validates exported scripts (for example `init.kts`
 
 Successful script validations are intentionally silent in command output to keep `koupper module` focused on actionable diagnostics.
 
+When script validation fails, Koupper prints the failing script filename (for example: `[ScriptingHost][ERROR] Script failed: init.kts`) before compiler diagnostics.
+
 Common case:
 
 - `Unresolved reference: ModuleProcessor` in `init.kts` means the script is using `ModuleProcessor` without importing `com.koupper.octopus.process.ModuleProcessor`.
