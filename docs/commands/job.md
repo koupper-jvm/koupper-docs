@@ -26,3 +26,5 @@ koupper job run-worker
 - Run from module root to use that module's `jobs.json` and script context.
 - `run-worker` executes queued tasks and prints each result block.
 - Use `--jobId` to replay one specific task when debugging.
+- Job execution traces are also written to `~/.koupper/logs/octopus-executions.jsonl`.
+- Helper payload files in `~/.koupper/helpers` are generated only by commands that explicitly report payload snapshots (for example module analysis).

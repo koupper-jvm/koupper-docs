@@ -42,3 +42,9 @@ JVM property equivalents:
 export JAVA_TOOL_OPTIONS="-Dkoupper.octopus.host=127.0.0.1 -Dkoupper.octopus.port=9998"
 koupper run examples/hello-world.kts
 ```
+
+## Execution logs and metrics
+
+- Runtime/system logs are written under `~/.koupper/logs`.
+- Script execution metrics are appended to `~/.koupper/logs/octopus-executions.jsonl`.
+- `koupper run` does not create `~/.koupper/helpers/*.json` snapshots unless a command explicitly reports payloads.
