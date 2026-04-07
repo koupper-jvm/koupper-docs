@@ -44,7 +44,15 @@ features:
 - Start with [Getting Started](/getting-started) and validate your environment with [Quick Smoke](/examples/quick-smoke).
 - Learn core command workflows in [Command Overview](/commands/) and then jump into specific command pages.
 - Explore integration capabilities in [Providers](/providers/) and wire only the providers your module needs.
+- Walk through hands-on scenarios in [Examples Hub](/examples/) for scripts, jobs, deploy, MCP, and n8n.
 - Move to [Production Hardening](/production/hardening) and [Release Workflow](/production/release-workflow) when you prepare CI and deployment.
+
+## Why teams adopt Koupper
+
+- One script model from local prototype to deployable runtime flow.
+- Provider contracts keep integrations explicit and swappable.
+- Octopus protocol stabilizes command/runtime behavior across environments.
+- Local-first scaffolding avoids brittle remote bootstrap dependencies.
 
 ## Typical journey
 

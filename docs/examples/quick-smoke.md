@@ -37,3 +37,19 @@ koupper new module name="smoke-module",version="1.0.0",package="smoke.module"
 ```bash
 koupper module add-scripts name="smoke-module" --script-inclusive "extensions/sample.kts"
 ```
+
+## 7) Provider discovery
+
+```bash
+koupper provider list
+koupper provider info mcp
+koupper provider info n8n
+```
+
+## 8) Job subsystem baseline
+
+```bash
+koupper new module name="smoke-jobs",version="1.0.0",package="smoke.jobs",template="jobs"
+cd smoke-jobs
+koupper job list
+```

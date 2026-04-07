@@ -12,6 +12,7 @@ module.exports = {
       { text: "Start", link: "/getting-started" },
       { text: "Commands", link: "/commands/" },
       { text: "Providers", link: "/providers/" },
+      { text: "Architecture", link: "/architecture/" },
       { text: "Production", link: "/production/hardening" },
       { text: "GitHub", link: "https://github.com/koupper-jvm/koupper" },
     ],
@@ -28,6 +29,7 @@ module.exports = {
         items: [
           { text: "Getting Started", link: "/getting-started" },
           { text: "Quick Smoke", link: "/examples/quick-smoke" },
+          { text: "Examples Hub", link: "/examples/" },
         ],
       },
       {
@@ -78,6 +80,18 @@ module.exports = {
         ],
       },
       {
+        text: "Examples",
+        items: [
+          { text: "Examples Hub", link: "/examples/" },
+          { text: "Script Basics", link: "/examples/script-basics" },
+          { text: "Jobs Worker Flow", link: "/examples/jobs-worker-flow" },
+          { text: "Deploy Flow", link: "/examples/deploy-flow" },
+          { text: "MCP Tool Server", link: "/examples/mcp-tool-server" },
+          { text: "n8n Workflow", link: "/examples/n8n-workflow" },
+          { text: "Quick Smoke", link: "/examples/quick-smoke" },
+        ],
+      },
+      {
         text: "Automation",
         items: [
           { text: "GitHub Integration Flow", link: "/automation/github-integration-flow" },
@@ -86,7 +100,10 @@ module.exports = {
       {
         text: "Architecture",
         items: [
-          { text: "How a Web Script Works", link: "/how-a-web-script-works" },
+          { text: "Architecture Overview", link: "/architecture/" },
+          { text: "Script Execution Lifecycle", link: "/architecture/script-execution-lifecycle" },
+          { text: "Runtime Topology", link: "/architecture/runtime-topology" },
+          { text: "Provider Runtime Contract", link: "/architecture/provider-runtime-contract" },
           { text: "Local-first Scaffolding", link: "/architecture/local-first-scaffolding" },
         ],
       },

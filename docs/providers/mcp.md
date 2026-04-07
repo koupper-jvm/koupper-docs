@@ -14,8 +14,18 @@
 
 - None required by default.
 
+## Typical use cases
+
+- expose script-backed tools for local assistants/agents
+- register runtime tool endpoints for internal automation
+- keep discovery + execution inside the same runtime boundary
+
 ## CLI discovery
 
 ```bash
 koupper provider info mcp
 ```
+
+## Example guide
+
+- [MCP Tool Server Example](/examples/mcp-tool-server)
