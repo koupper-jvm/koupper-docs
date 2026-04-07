@@ -2,6 +2,13 @@
 
 Inspect module structure and evolve existing projects.
 
+## Usage
+
+```bash
+koupper module [moduleName]
+koupper module add-scripts name="demo" [package="demo.app"] [--overwrite] <script import flags>
+```
+
 ## Analyze module
 
 ```bash
@@ -46,3 +53,12 @@ Overwrite behavior:
 ```bash
 koupper module add-scripts name="demo-script" --script-inclusive "extensions/sample.kts" --overwrite
 ```
+
+## Script import flags
+
+| Flag | Mode | Behavior |
+| --- | --- | --- |
+| `-si`, `--script-inclusive` | inclusive | Keeps relative path under module `extensions/`. |
+| `-se`, `--script-exclusive` | exclusive | Copies file into module `extensions/` root. |
+| `-swi`, `--script-wildcard-inclusive` | inclusive wildcard | Imports all matching scripts preserving subfolders. |
+| `-swe`, `--script-wildcard-exclusive` | exclusive wildcard | Imports all matching scripts flattened into root. |

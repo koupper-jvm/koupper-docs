@@ -9,6 +9,11 @@ koupper provider list
 koupper provider info <provider-id-or-class>
 ```
 
+## Output contract
+
+- `list`: provider id, service provider class, short description.
+- `info`: description, bindings, implementation tags (if present), env vars, docs URL.
+
 ## `list`
 
 ```bash
@@ -43,6 +48,12 @@ Returns provider details:
 ```bash
 kotlinc -script install.kts -- --force
 ```
+
+`info` accepts any of the following identifiers:
+
+- provider id (example: `github`)
+- service provider class (example: `GitHubServiceProvider`)
+- contract name (example: `GitHubClient`)
 
 ## Reference pages
 
