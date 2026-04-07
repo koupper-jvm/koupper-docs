@@ -10,7 +10,17 @@ koupper job build-environment
 koupper job list [--jobId=<id>] [--configId=<id>]
 koupper job run-worker [--jobId=<id>] [--configId=<id>]
 koupper job status [--configId=<id>]
+koupper job failed [--jobId=<id>] [--configId=<id>]
+koupper job retry [--jobId=<id>] [--configId=<id>]
 ```
+
+## Common flags
+
+| Flag | Description |
+| --- | --- |
+| `--force` | Recreates `jobs.json` during `init`. |
+| `--jobId=<id>` | Filters operation to one specific job. |
+| `--configId=<id>` | Filters operation to one configuration block. |
 
 ## Typical workflow
 

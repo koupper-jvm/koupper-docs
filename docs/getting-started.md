@@ -2,6 +2,13 @@
 
 This guide gets Koupper running quickly with the current local-first scaffolding flow.
 
+## What you get with Koupper
+
+- local-first scaffolding with Kotlin-native scripts
+- runtime daemon model (Octopus) for consistent execution
+- provider catalog for infra/API integrations (GitHub, Docker, SSH, n8n, MCP, and more)
+- deploy + production hardening path without changing your script model
+
 ## 1) Clone and install
 
 ```bash
@@ -35,6 +42,13 @@ Then inspect module details:
 koupper module demo-script
 ```
 
+Run jobs and deploy flows later from the same command surface:
+
+```bash
+koupper job list
+koupper deploy examples/hello-world.kts "10.0.0.50"
+```
+
 ## 4) Add scripts later without destructive overwrite
 
 ```bash
@@ -54,6 +68,9 @@ export KOUPPER_OCTOPUS_TOKEN="your-token"
 ## Next
 
 - [Quick Smoke](/examples/quick-smoke)
+- [Examples Hub](/examples/)
 - [`run` command](/commands/run)
 - [`new` command](/commands/new)
 - [`module` command](/commands/module)
+- [Architecture Overview](/architecture/)
+- [Provider Catalog](/providers/)

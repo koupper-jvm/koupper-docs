@@ -2,17 +2,29 @@
 
 Execute Kotlin scripts through the Octopus runtime.
 
-## Basic usage
+## Usage
 
 ```bash
 koupper run path/to/script.kts
 ```
 
-With params:
+Run `init.kts` from current directory:
+
+```bash
+koupper run
+```
+
+With positional params:
 
 ```bash
 koupper run examples/hello-world.kts "Developer"
 ```
+
+## Options
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `--json-file <file.json>` | optional | Reads params payload from a JSON file instead of inline shell argument. |
 
 ## JSON payload modes
 
@@ -40,6 +52,13 @@ JVM property equivalents:
 
 ```bash
 export JAVA_TOOL_OPTIONS="-Dkoupper.octopus.host=127.0.0.1 -Dkoupper.octopus.port=9998"
+koupper run examples/hello-world.kts
+```
+
+Auth token (optional, when daemon requires it):
+
+```bash
+export KOUPPER_OCTOPUS_TOKEN="your-daemon-token"
 koupper run examples/hello-world.kts
 ```
 
