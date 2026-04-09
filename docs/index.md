@@ -42,6 +42,7 @@ features:
 ## The documentation path
 
 - Start with [Getting Started](/getting-started) and validate your environment with [Quick Smoke](/examples/quick-smoke).
+- Review [Real-World Use Cases](/use-cases) to map Koupper to your team context.
 - Learn core command workflows in [Command Overview](/commands/) and then jump into specific command pages.
 - Explore integration capabilities in [Providers](/providers/) and wire only the providers your module needs.
 - Walk through hands-on scenarios in [Examples Hub](/examples/) for scripts, jobs, deploy, MCP, and n8n.

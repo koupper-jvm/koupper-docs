@@ -10,6 +10,7 @@ module.exports = {
     siteTitle: "Koupper Docs",
     nav: [
       { text: "Start", link: "/getting-started" },
+      { text: "Use Cases", link: "/use-cases" },
       { text: "Commands", link: "/commands/" },
       { text: "Providers", link: "/providers/" },
       { text: "Architecture", link: "/architecture/" },
@@ -27,6 +28,7 @@ module.exports = {
         text: "Start Here",
         items: [
           { text: "Getting Started", link: "/getting-started" },
+          { text: "Use Cases", link: "/use-cases" },
           { text: "Quick Smoke", link: "/examples/quick-smoke" },
           { text: "Examples Hub", link: "/examples/" },
         ],
