@@ -10,11 +10,22 @@ Koupper uses independent artifact tracks and stable tags.
 
 ## Recommended release steps
 
-1. Merge release-ready PRs into `develop`.
-2. Bump versions and update changelogs.
-3. Tag runtime + CLI + optional monorepo snapshot.
-4. Publish GitHub Releases from tags.
-5. Validate with quick smoke commands.
+1. Start from `develop` and work in a dedicated branch (`feature/*`, `fix/*`, `docs/*`).
+2. Run preflight checks for the feature branch.
+3. Run the release flow in dry-run mode.
+4. Validate local tests/build for impacted modules.
+5. Run release flow to create PR, wait for CI, and merge only on `success`.
+
+## Mandatory automation commands
+
+Use Koupper release scripts instead of manual PR/tag command sequences.
+
+```bash
+koupper run scripts/release/preflight.kts '{"featureBranch":"feature/my-change"}'
+koupper run scripts/release/release-flow.kts '{"featureBranch":"feature/my-change","dryRun":true}'
+koupper run scripts/release/release-flow.kts '{"featureBranch":"feature/my-change","waitForCi":true,"mergeAfterCi":false}'
+koupper run scripts/release/release-flow.kts '{"featureBranch":"feature/my-change","waitForCi":true,"mergeAfterCi":true,"adminMerge":true}'
+```
 
 Before tagging, run the [Script Execution Checklist](/production/script-execution-checklist).
 

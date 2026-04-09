@@ -23,6 +23,7 @@ koupper provider info <name>
 | [`aws-deploy`](/providers/aws-deploy) | `AwsDeployServiceProvider` | AWS deployment orchestration for preflight, Lambda, static sites, and API smoke tests. |
 | [`aws-dynamo`](/providers/aws-dynamo) | `AwsServiceProvider` | DynamoDB data access provider. |
 | [`aws-s3`](/providers/aws-s3) | `AwsS3ServiceProvider` | S3 storage provider for uploads and presigned flows. |
+| [`command-runner`](/providers/command-runner) | `CommandRunnerServiceProvider` | Generic shell/binary command execution with timeout, dry-run, and masking support. |
 | [`crypto`](/providers/crypto) | `CryptoServiceProvider` | Symmetric encryption helpers. |
 | [`db`](/providers/db) | `DBServiceProvider` | Database connectors for PostgreSQL and SQLite sessions. |
 | [`docker`](/providers/docker) | `DockerServiceProvider` | Docker CLI automation for image, container and compose workflows. |
@@ -64,6 +65,7 @@ koupper provider info <name>
 - [Runtime Router Provider](/providers/runtime-router)
 - [AWS Dynamo Provider](/providers/aws-dynamo)
 - [AWS S3 Provider](/providers/aws-s3)
+- [Command Runner Provider](/providers/command-runner)
 - [Hashing Provider](/providers/hashing)
 - [SSH Provider](/providers/ssh)
 - [Terminal Runtime](/providers/terminal)
