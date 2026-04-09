@@ -10,6 +10,7 @@ module.exports = {
     siteTitle: "Koupper Docs",
     nav: [
       { text: "Start", link: "/getting-started" },
+      { text: "Why Koupper", link: "/why-koupper-vs-alternatives" },
       { text: "ICP", link: "/ideal-customer-profile" },
       { text: "Use Cases", link: "/use-cases" },
       { text: "Commands", link: "/commands/" },
@@ -29,6 +30,7 @@ module.exports = {
         text: "Start Here",
         items: [
           { text: "Getting Started", link: "/getting-started" },
+          { text: "Why Koupper vs Alternatives", link: "/why-koupper-vs-alternatives" },
           { text: "Ideal Customer Profile", link: "/ideal-customer-profile" },
           { text: "Use Cases", link: "/use-cases" },
           { text: "Quick Smoke", link: "/examples/quick-smoke" },
@@ -87,6 +89,7 @@ module.exports = {
         text: "Examples",
         items: [
           { text: "Examples Hub", link: "/examples/" },
+          { text: "Golden Demo: Worker Flow", link: "/examples/golden-demo-worker-flow" },
           { text: "Script Basics", link: "/examples/script-basics" },
           { text: "Jobs Worker Flow", link: "/examples/jobs-worker-flow" },
           { text: "Deploy Flow", link: "/examples/deploy-flow" },

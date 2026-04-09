@@ -43,6 +43,7 @@ features:
 
 - Start with [Getting Started](/getting-started) and validate your environment with [Quick Smoke](/examples/quick-smoke).
 - Confirm fit with [Ideal Customer Profile](/ideal-customer-profile).
+- See [Why Koupper vs Alternatives](/why-koupper-vs-alternatives) for positioning context.
 - Review [Real-World Use Cases](/use-cases) to map Koupper to your team context.
 - Learn core command workflows in [Command Overview](/commands/) and then jump into specific command pages.
 - Explore integration capabilities in [Providers](/providers/) and wire only the providers your module needs.
@@ -56,6 +57,10 @@ features:
 - Provider contracts keep integrations explicit and swappable.
 - Octopus protocol stabilizes command/runtime behavior across environments.
 - Local-first scaffolding avoids brittle remote bootstrap dependencies.
+
+## Adoption proof point
+
+- Run the [Golden Demo: Worker Flow](/examples/golden-demo-worker-flow) to validate practical fit in under 10 minutes.
 
 ## Typical journey
 
