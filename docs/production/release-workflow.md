@@ -10,11 +10,13 @@ Koupper uses independent artifact tracks and stable tags.
 
 ## Recommended release steps
 
-1. Merge release-ready PRs into `main`.
+1. Merge release-ready PRs into `develop`.
 2. Bump versions and update changelogs.
 3. Tag runtime + CLI + optional monorepo snapshot.
 4. Publish GitHub Releases from tags.
 5. Validate with quick smoke commands.
+
+Before tagging, run the [Script Execution Checklist](/production/script-execution-checklist).
 
 ## Tag examples
 

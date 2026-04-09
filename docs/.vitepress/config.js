@@ -10,6 +10,7 @@ module.exports = {
     siteTitle: "Koupper Docs",
     nav: [
       { text: "Start", link: "/getting-started" },
+      { text: "ICP", link: "/ideal-customer-profile" },
       { text: "Use Cases", link: "/use-cases" },
       { text: "Commands", link: "/commands/" },
       { text: "Providers", link: "/providers/" },
@@ -28,6 +29,7 @@ module.exports = {
         text: "Start Here",
         items: [
           { text: "Getting Started", link: "/getting-started" },
+          { text: "Ideal Customer Profile", link: "/ideal-customer-profile" },
           { text: "Use Cases", link: "/use-cases" },
           { text: "Quick Smoke", link: "/examples/quick-smoke" },
           { text: "Examples Hub", link: "/examples/" },
@@ -114,6 +116,7 @@ module.exports = {
         text: "Production",
         items: [
           { text: "Hardening Guide", link: "/production/hardening" },
+          { text: "Script Execution Checklist", link: "/production/script-execution-checklist" },
           { text: "Release Workflow", link: "/production/release-workflow" },
           { text: "Troubleshooting", link: "/production/troubleshooting" },
         ],
