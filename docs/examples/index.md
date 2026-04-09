@@ -18,3 +18,7 @@ Use these examples as a practical path from first script to production operation
 3. Deploy Flow
 4. MCP or n8n depending on your integration stack
 5. Quick Smoke for release confidence
+
+## Source mapping
+
+- [Docs-to-source map](/examples/source-map)

@@ -23,8 +23,12 @@ koupper provider info <provider-id-or-class-or-contract>
 - Allow different backends with minimal script churn.
 - Make runtime requirements explicit before execution.
 
-![Provider contract placeholder](https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1400&q=80)
+## Resolution flow
 
-Prompt for final diagram image:
-
-`Create a provider contract resolution diagram for Koupper showing: Script Call Site -> Contract Interface -> Service Provider Registration -> Implementation Instance -> External Service. Annotate with provider id, bindings, env schema, and docs link metadata from provider catalog.`
+```text
+Script call site
+  -> contract interface
+  -> service provider registration
+  -> implementation instance
+  -> external system/API
+```
