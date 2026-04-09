@@ -58,6 +58,7 @@ module.exports = {
           { text: "aws-deploy", link: "/providers/aws-deploy" },
           { text: "aws-dynamo", link: "/providers/aws-dynamo" },
           { text: "aws-s3", link: "/providers/aws-s3" },
+          { text: "command-runner", link: "/providers/command-runner" },
           { text: "crypto", link: "/providers/crypto" },
           { text: "db", link: "/providers/db" },
           { text: "docker", link: "/providers/docker" },
