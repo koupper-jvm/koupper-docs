@@ -13,6 +13,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Checkout koupper core catalog
+        uses: actions/checkout@v4
+        with:
+          repository: koupper-jvm/koupper
+          ref: develop
+          path: koupper-core
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:

@@ -5,7 +5,12 @@ const docsRoot = path.join(__dirname, "..", "docs");
 const providersIndexPath = path.join(docsRoot, "providers", "index.md");
 const vitepressConfigPath = path.join(docsRoot, ".vitepress", "config.js");
 const providersDir = path.join(docsRoot, "providers");
-const catalogPath = path.join(__dirname, "..", "..", "koupper", "providers", "src", "main", "resources", "providers-catalog.json");
+const catalogPathCandidates = [
+  process.env.KOUPPER_PROVIDERS_CATALOG_PATH,
+  path.join(__dirname, "..", "..", "koupper", "providers", "src", "main", "resources", "providers-catalog.json"),
+  path.join(__dirname, "..", "koupper-core", "koupper", "providers", "src", "main", "resources", "providers-catalog.json"),
+  path.join(__dirname, "..", "..", "koupper-core", "koupper", "providers", "src", "main", "resources", "providers-catalog.json"),
+].filter(Boolean);
 
 function read(filePath) {
   return fs.readFileSync(filePath, "utf8");
@@ -18,6 +23,15 @@ function uniq(values) {
 function difference(a, b) {
   const right = new Set(b);
   return a.filter((item) => !right.has(item));
+}
+
+const catalogPath = catalogPathCandidates.find((candidate) => fs.existsSync(candidate));
+
+if (!catalogPath) {
+  console.error("Provider sync validation failed: could not locate providers-catalog.json");
+  console.error("Checked paths:");
+  catalogPathCandidates.forEach((candidate) => console.error(`- ${candidate}`));
+  process.exit(1);
 }
 
 const catalog = JSON.parse(read(catalogPath));
