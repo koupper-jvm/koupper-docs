@@ -50,6 +50,7 @@ module.exports = {
           { text: "Catalog", link: "/providers/" },
           { text: "ai", link: "/providers/ai" },
           { text: "ai-llm-ops", link: "/providers/ai-llm-ops" },
+          { text: "aws-deploy", link: "/providers/aws-deploy" },
           { text: "aws-dynamo", link: "/providers/aws-dynamo" },
           { text: "aws-s3", link: "/providers/aws-s3" },
           { text: "crypto", link: "/providers/crypto" },
@@ -101,6 +102,7 @@ module.exports = {
         text: "Architecture",
         items: [
           { text: "Architecture Overview", link: "/architecture/" },
+          { text: "Script Execution Contract", link: "/architecture/script-execution-contract" },
           { text: "Script Execution Lifecycle", link: "/architecture/script-execution-lifecycle" },
           { text: "Runtime Topology", link: "/architecture/runtime-topology" },
           { text: "Provider Runtime Contract", link: "/architecture/provider-runtime-contract" },

@@ -5,9 +5,10 @@ This section describes how Koupper behaves as a runtime platform, not only as a 
 ## Recommended reading order
 
 1. [Script Execution Lifecycle](/architecture/script-execution-lifecycle)
-2. [Runtime Topology](/architecture/runtime-topology)
-3. [Provider Runtime Contract](/architecture/provider-runtime-contract)
-4. [Local-first Scaffolding](/architecture/local-first-scaffolding)
+2. [Script Execution Contract](/architecture/script-execution-contract)
+3. [Runtime Topology](/architecture/runtime-topology)
+4. [Provider Runtime Contract](/architecture/provider-runtime-contract)
+5. [Local-first Scaffolding](/architecture/local-first-scaffolding)
 
 ## Scope
 
