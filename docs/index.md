@@ -50,6 +50,7 @@ features:
 ## Why teams adopt Koupper
 
 - One script model from local prototype to deployable runtime flow.
+- Single-entrypoint execution contract keeps script behavior predictable at runtime.
 - Provider contracts keep integrations explicit and swappable.
 - Octopus protocol stabilizes command/runtime behavior across environments.
 - Local-first scaffolding avoids brittle remote bootstrap dependencies.
