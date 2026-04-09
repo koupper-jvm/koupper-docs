@@ -17,7 +17,10 @@
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "codemirror": "^6.0.1",
+    "gif-encoder-2": "^1.0.5",
     "markdown-it": "^14.1.0",
+    "pngjs": "^7.0.0",
+    "puppeteer": "^24.40.0",
     "thememirror": "^2.0.1",
     "vitepress": "^1.0.0-rc.45",
     "vue": "^3.4.21"

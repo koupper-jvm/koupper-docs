@@ -6,7 +6,7 @@ module.exports = {
   ],
   cleanUrls: true,
   themeConfig: {
-    logo: "/koupper-logo.svg",
+    logo: { light: "/koupper-white-mode-logo.svg", dark: "/koupper-logo.svg" },
     siteTitle: "Koupper Docs",
     nav: [
       { text: "Start", link: "/getting-started" },
@@ -20,7 +20,6 @@ module.exports = {
       { icon: "github", link: "https://github.com/koupper-jvm/koupper" },
     ],
     footer: {
-      message: "Built with Koupper and VitePress",
       copyright: "Copyright © 2026 Koupper",
     },
     sidebar: [

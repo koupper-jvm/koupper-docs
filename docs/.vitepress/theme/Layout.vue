@@ -1,7 +1,9 @@
 <script setup>
 import DefaultTheme from "vitepress/theme";
 import { ref, onMounted } from "vue";
+import { useData } from "vitepress";
 
+const { isDark } = useData();
 const particles = ref([]);
 
 onMounted(() => {
@@ -84,10 +86,7 @@ onMounted(() => {
             <div class="kpr-orbit-ring kpr-orbit-ring-2" aria-hidden="true"></div>
             <div class="kpr-orbit-center">
               <div class="kpr-orbit-center-inner">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="3"/>
-                  <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
-                </svg>
+                <img :src="isDark ? '/koupper-logo.svg' : '/koupper-white-mode-logo.svg'" width="36" height="36" alt="Koupper Octopus Mascot" style="margin-bottom: -2px;" />
                 <span>Octopus</span>
               </div>
             </div>
