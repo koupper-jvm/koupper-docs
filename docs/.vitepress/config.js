@@ -128,6 +128,7 @@ module.exports = {
           { text: "Hardening Guide", link: "/production/hardening" },
           { text: "Script Execution Checklist", link: "/production/script-execution-checklist" },
           { text: "Drift Spec v1", link: "/production/drift-spec-v1" },
+          { text: "Reconcile Value", link: "/production/reconcile-value-proposition" },
           { text: "Reconcile Runbook", link: "/production/reconcile-runbook" },
           { text: "Migration: Infra+Reconcile", link: "/production/migration-reconcile" },
           { text: "Release Workflow", link: "/production/release-workflow" },

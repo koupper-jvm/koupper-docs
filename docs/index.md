@@ -48,6 +48,7 @@ features:
 - Learn core command workflows in [Command Overview](/commands/) and then jump into specific command pages.
 - Explore integration capabilities in [Providers](/providers/) and wire only the providers your module needs.
 - Walk through hands-on scenarios in [Examples Hub](/examples/) for scripts, jobs, deploy, MCP, and n8n.
+- Review the production-oriented feature summary in [Production Reconcile Value](/production/reconcile-value-proposition).
 - Move to [Production Hardening](/production/hardening) and [Release Workflow](/production/release-workflow) when you prepare CI and deployment.
 
 ## Why teams adopt Koupper
