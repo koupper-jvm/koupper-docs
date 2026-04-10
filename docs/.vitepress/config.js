@@ -111,6 +111,7 @@ module.exports = {
         items: [
           { text: "Architecture Overview", link: "/architecture/" },
           { text: "Script Execution Contract", link: "/architecture/script-execution-contract" },
+          { text: "Annotations Reference", link: "/architecture/annotations-reference" },
           { text: "Script Execution Lifecycle", link: "/architecture/script-execution-lifecycle" },
           { text: "Runtime Topology", link: "/architecture/runtime-topology" },
           { text: "Provider Runtime Contract", link: "/architecture/provider-runtime-contract" },
