@@ -2,9 +2,9 @@ name: Docs Quality
 
 on:
   pull_request:
-    branches: [develop]
+    branches: [develop, main, master]
   push:
-    branches: [develop]
+    branches: [develop, main, master]
 
 concurrency:
   group: docs-quality-${{ github.event.pull_request.number || github.ref }}
