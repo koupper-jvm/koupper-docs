@@ -2,26 +2,43 @@ const fs = require("fs");
 const path = require("path");
 
 const root = path.join(__dirname, "..");
-const cliCommandsPath = path.join(
-  root,
-  "..",
-  "koupper-cli",
-  "src",
-  "main",
-  "kotlin",
-  "com",
-  "koupper",
-  "cli",
-  "commands",
-  "AvailableCommands.kt"
-);
+const cliCommandCandidates = [
+  path.join(
+    root,
+    "..",
+    "koupper-cli",
+    "src",
+    "main",
+    "kotlin",
+    "com",
+    "koupper",
+    "cli",
+    "commands",
+    "AvailableCommands.kt"
+  ),
+  path.join(
+    root,
+    "koupper-core",
+    "koupper-cli",
+    "src",
+    "main",
+    "kotlin",
+    "com",
+    "koupper",
+    "cli",
+    "commands",
+    "AvailableCommands.kt"
+  ),
+];
 
 const commandsDocsDir = path.join(root, "docs", "commands");
 const commandsIndexPath = path.join(commandsDocsDir, "index.md");
 const sidebarPath = path.join(root, "docs", ".vitepress", "config.js");
 
-if (!fs.existsSync(cliCommandsPath)) {
-  console.error(`CLI commands file not found: ${cliCommandsPath}`);
+const cliCommandsPath = cliCommandCandidates.find((candidate) => fs.existsSync(candidate));
+
+if (!cliCommandsPath) {
+  console.error(`CLI commands file not found. Looked in: ${cliCommandCandidates.join(", ")}`);
   process.exit(1);
 }
 
