@@ -29,6 +29,15 @@ Use `koupper reconcile run` and pass your existing scripts as commands:
 
 No project renaming or script rewrites required.
 
+Use optional AWS controls when needed:
+
+- `--aws-timeout-seconds`
+- `--aws-retry-count`
+- `--aws-retry-backoff-ms`
+- `--frontend-backup-mode`
+
+These are exported to stage commands as environment variables for backward-compatible adoption.
+
 ## Step 4: Gate CI with stable JSON
 
 - Parse `ok`, `exitCode`, and `artifacts.stages[*]`.
@@ -38,3 +47,9 @@ No project renaming or script rewrites required.
 
 - start: `continue_on_error` in lower environments
 - mature: `abort_on_failure` or `strict` in production lanes
+
+## Defaults and compatibility notes
+
+- `frontend-backup-mode` default: `incremental`.
+- Existing deploy flows remain compatible; controls are additive.
+- No breaking CLI argument removals were introduced.
