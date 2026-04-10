@@ -11,6 +11,8 @@ Koupper CLI commands are organized around one flow: scaffold, run, evolve, opera
 | Module evolution | [`koupper module`](/commands/module) | Add scripts and inspect module metadata. |
 | Background jobs | [`koupper job`](/commands/job) | List, run, and inspect queued worker jobs. |
 | Deployment | [`koupper deploy`](/commands/deploy) | Package and deploy script/module artifacts. |
+| Infrastructure | [`koupper infra`](/commands/infra) | Run Terraform lifecycle commands with stable JSON output. |
+| Reconcile | [`koupper reconcile`](/commands/reconcile) | Orchestrate infra, preflight, deploy, smoke, and rollback stages. |
 | Capability discovery | [`koupper provider`](/commands/provider) | List providers and inspect contracts + env requirements. |
 
 ## Typical lifecycle
@@ -21,6 +23,8 @@ cd demo
 koupper run extensions/hello-world.kts
 koupper job list
 koupper deploy
+koupper infra plan --dir=infra --var-file=env/dev.tfvars --json
+koupper reconcile run --dir=infra --auto-approve --stages=infra,preflight,deploy,smoke --json
 ```
 
 ## Tips
