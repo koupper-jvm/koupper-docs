@@ -75,6 +75,12 @@ koupper run scripts/release/release-flow.kts '{"featureBranch":"feature/my-chang
 koupper run scripts/release/release-flow.kts '{"featureBranch":"feature/my-change","waitForCi":true,"mergeAfterCi":true,"adminMerge":true}'
 ```
 
+Fast-lane for `develop` PRs (create PR immediately, let GitHub auto-merge after required checks):
+
+```bash
+koupper run scripts/release/fast-lane.kts '{"featureBranch":"feature/my-change","enableAutoMerge":true}'
+```
+
 Before tagging, run the [Script Execution Checklist](/production/script-execution-checklist).
 
 ## Tag examples
