@@ -33,9 +33,11 @@ koupper provider info <name>
 | [`hashing`](/providers/hashing) | `HasherServiceProvider` | Password hashing and verification utilities. |
 | [`http`](/providers/http) | `HttpServiceProvider` | HTTP invoker for outbound API requests. |
 | [`iac`](/providers/iac) | `IaCServiceProvider` | Terraform-based IaC planning/apply workflows with approval guardrails. |
+| [`job-ops`](/providers/job-ops) | `JobOpsServiceProvider` | Typed job queue status/list/run/failed/retry operations. |
 | [`jwt`](/providers/jwt) | `JWTServiceProvider` | JWT signing and validation utilities. |
 | [`k8s`](/providers/k8s) | `K8sServiceProvider` | Kubernetes operations provider over kubectl. |
 | [`logger`](/providers/logger) | `LoggerServiceProvider` | Database-backed application logger. |
+| [`local-e2e`](/providers/local-e2e) | `LocalE2EServiceProvider` | Local E2E runner for process, HTTP, jobs and persistence checks. |
 | [`mailing`](/providers/mailing) | `SenderServiceProvider` | SMTP email sender utilities. |
 | [`mcp`](/providers/mcp) | `MCPServiceProvider` | Local MCP-style tool server endpoints for discovery and invocation. |
 | [`n8n`](/providers/n8n) | `N8NServiceProvider` | Trigger n8n workflows and poll execution status. |
@@ -81,6 +83,8 @@ koupper provider info <name>
 - [Queue Ops Provider](/providers/queue-ops)
 - [K8s Provider](/providers/k8s)
 - [IaC Provider](/providers/iac)
+- [Job Ops Provider](/providers/job-ops)
+- [Local E2E Provider](/providers/local-e2e)
 - [Vector DB Provider](/providers/vector-db)
 - [n8n Provider](/providers/n8n)
 - [Templates Provider](/providers/templates)

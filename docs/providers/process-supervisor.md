@@ -8,11 +8,12 @@ Contract: `ProcessSupervisor`
 ## Capabilities
 
 - Start detached/background processes (`start`) by `shellCommand` or `executable + args`.
-- Prevent duplicate start by `name` when a process is already running.
-- Query process state (`status`) with optional HTTP health check.
-- List registered processes (`list`) across sessions.
-- Stop by `name` or `pid` (`stop`) with optional force mode.
-- Read process logs (`logs`) with tail support.
+- Prevent duplicate start by `name` when a process is already running (idempotent by name).
+- Run startup health validation (`ensureHealthyOnStart`) with retry/timeouts.
+- Query process state (`status`/`statusMany`) with flexible health policy.
+- List registered processes (`list`) across sessions with stale auto-prune.
+- Stop by `name` or `pid` (`stop`/`stopMany`) with optional force mode.
+- Read process logs (`logs`) with tail support, byte caps, and ANSI stripping.
 - Remove orphan metadata records (`cleanup`).
 
 ## Persistence
@@ -67,13 +68,34 @@ val started = supervisor.start(
 ## Status + health example
 
 ```kotlin
+import com.koupper.providers.process.ProcessHealthPolicy
 import com.koupper.providers.process.ProcessStatusRequest
 
 val status = supervisor.status(
     ProcessStatusRequest(
         name = "frontend-dev",
-        healthTimeoutMs = 1200
+        healthPolicy = ProcessHealthPolicy(
+            acceptedStatusCodes = setOf(200, 204),
+            retries = 2,
+            retryDelayMs = 200,
+            timeoutMs = 1200
+        )
     )
+)
+```
+
+## Batch operations example
+
+```kotlin
+import com.koupper.providers.process.ProcessStatusManyRequest
+import com.koupper.providers.process.ProcessStopManyRequest
+
+val statuses = supervisor.statusMany(
+    ProcessStatusManyRequest(names = listOf("frontend-dev", "backend-dev"))
+)
+
+val stopped = supervisor.stopMany(
+    ProcessStopManyRequest(names = listOf("frontend-dev", "backend-dev"), force = true)
 )
 ```
 
@@ -84,7 +106,14 @@ import com.koupper.providers.process.ProcessLogsRequest
 import com.koupper.providers.process.ProcessStopRequest
 
 val stop = supervisor.stop(ProcessStopRequest(name = "frontend-dev", force = true))
-val logs = supervisor.logs(ProcessLogsRequest(name = "frontend-dev", tailLines = 80))
+val logs = supervisor.logs(
+    ProcessLogsRequest(
+        name = "frontend-dev",
+        tailLines = 80,
+        maxBytes = 64 * 1024,
+        stripAnsi = true
+    )
+)
 ```
 
 ## Script examples

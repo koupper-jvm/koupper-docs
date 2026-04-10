@@ -1,14 +1,20 @@
-# AWS Dynamo Provider
+# `aws-dynamo` Provider
 
-`aws-dynamo` integrates DynamoDB clients for script and module data operations.
+`aws-dynamo` integrates DynamoDB clients for app data operations and local Dynamo table admin helpers.
 
-## Service provider
+Service provider class: `AwsServiceProvider`
 
-- `AwsServiceProvider`
-
-## Contract and implementations
+## Contracts and implementations
 
 - `DynamoClient` -> `DynamoClientImpl`
+- `DynamoLocalAdmin` -> `DynamoLocalAdminImpl`
+
+## Local admin capabilities (`DynamoLocalAdmin`)
+
+- Ensure table exists (`ensureTable`) from key and attribute definitions.
+- Check table presence (`tableExists`) and list tables (`listTables`).
+- Truncate table by key schema (`truncateTable`).
+- Quick count helpers (`scanCount`, `countByEmail`).
 
 ## Environment variables
 
