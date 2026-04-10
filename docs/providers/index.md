@@ -41,6 +41,7 @@ koupper provider info <name>
 | [`n8n`](/providers/n8n) | `N8NServiceProvider` | Trigger n8n workflows and poll execution status. |
 | [`notifications`](/providers/notifications) | `NotificationsServiceProvider` | Console or webhook operational notifications. |
 | [`observability`](/providers/observability) | `ObservabilityServiceProvider` | Metrics, events and trace sink abstraction with local backend. |
+| [`process-supervisor`](/providers/process-supervisor) | `ProcessSupervisorServiceProvider` | Local detached process management with persisted metadata, logs and health checks. |
 | [`queue-ops`](/providers/queue-ops) | `QueueOpsServiceProvider` | Local pending/requeue/dead-letter queue operations. |
 | [`rss`](/providers/rss) | `RSSServiceProvider` | RSS feed reader provider. |
 | [`runtime-router`](/providers/runtime-router) | `RuntimeRouterServiceProvider` | Runtime HTTP route registration and serving provider. |
@@ -76,6 +77,7 @@ koupper provider info <name>
 - [MCP Provider](/providers/mcp)
 - [Notifications Provider](/providers/notifications)
 - [Observability Provider](/providers/observability)
+- [Process Supervisor Provider](/providers/process-supervisor)
 - [Queue Ops Provider](/providers/queue-ops)
 - [K8s Provider](/providers/k8s)
 - [IaC Provider](/providers/iac)

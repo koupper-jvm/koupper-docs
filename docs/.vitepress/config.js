@@ -76,6 +76,7 @@ module.exports = {
           { text: "n8n", link: "/providers/n8n" },
           { text: "notifications", link: "/providers/notifications" },
           { text: "observability", link: "/providers/observability" },
+          { text: "process-supervisor", link: "/providers/process-supervisor" },
           { text: "queue-ops", link: "/providers/queue-ops" },
           { text: "rss", link: "/providers/rss" },
           { text: "runtime-router", link: "/providers/runtime-router" },
