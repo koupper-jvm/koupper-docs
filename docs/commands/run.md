@@ -25,6 +25,7 @@ koupper run examples/hello-world.kts "Developer"
 | Option | Type | Description |
 | --- | --- | --- |
 | `--json-file <file.json>` | optional | Reads params payload from a JSON file instead of inline shell argument. |
+| `--serve` | optional | Live mode for long-running scripts (servers/listeners). Keeps session attached until stopped. |
 
 ## JSON payload modes
 
@@ -61,6 +62,20 @@ Auth token (optional, when daemon requires it):
 export KOUPPER_OCTOPUS_TOKEN="your-daemon-token"
 koupper run examples/hello-world.kts
 ```
+
+## Live serve mode
+
+Use `--serve` when your script intentionally stays alive (for example, HTTP endpoint listeners):
+
+```bash
+koupper run examples/runtime-router-live-server.kts --serve
+```
+
+In serve mode:
+
+- CLI stays attached and prints runtime logs.
+- `Ctrl+C` sends a cancellation request to the daemon for the active execution.
+- Your script should handle interruption and release resources in `finally`.
 
 ## Execution logs and metrics
 
