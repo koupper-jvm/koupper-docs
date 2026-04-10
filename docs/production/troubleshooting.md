@@ -9,8 +9,15 @@ Symptoms:
 Fix:
 
 ```bash
-kotlinc -script install.kts -- --force
-kotlinc -script install.kts -- --doctor
+./scripts/setup/install.sh
+./scripts/setup/install.sh --doctor
+```
+
+Windows PowerShell:
+
+```powershell
+./scripts/setup/install.ps1
+./scripts/setup/install.ps1 -Doctor
 ```
 
 This refreshes local jars/templates and validates installation health.
@@ -25,7 +32,7 @@ Fix checklist:
 
 ```bash
 git checkout develop && git pull --ff-only origin develop
-kotlinc -script install.kts -- --force
+./scripts/setup/install.sh
 cd demo-jobs
 koupper job run-worker
 ```
@@ -41,7 +48,13 @@ koupper run examples/cli-report-generator.kts --json-file examples/cli-report-ge
 ## Verify local install quickly
 
 ```bash
-kotlinc -script install.kts -- --doctor
+./scripts/setup/install.sh --doctor
+```
+
+Windows PowerShell:
+
+```powershell
+./scripts/setup/install.ps1 -Doctor
 ```
 
 `doctor` checks jars, bin shims, and local scaffolding template provisioning.

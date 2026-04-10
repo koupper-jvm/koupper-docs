@@ -44,6 +44,7 @@ koupper module add-scripts name="smoke-module" --script-inclusive "extensions/sa
 koupper provider list
 koupper provider info mcp
 koupper provider info n8n
+koupper provider info process-supervisor
 ```
 
 ## 8) Job subsystem baseline
