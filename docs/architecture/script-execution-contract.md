@@ -8,6 +8,7 @@ Koupper scripts follow a runtime contract to keep behavior predictable across lo
 - Recommended entrypoint name: `setup`.
 - If no `@Export` is found, execution fails.
 - If multiple `@Export` declarations are found, execution fails with a clear error.
+- For complementary annotations around `@Export`, see [Annotations Reference](/architecture/annotations-reference).
 
 ## Recommended shape
 
