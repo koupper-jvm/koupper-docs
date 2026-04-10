@@ -19,3 +19,15 @@
 ```bash
 koupper provider info runtime-router
 ```
+
+## Live endpoint script workflow
+
+Use the runtime-router provider with `koupper run --serve` for local endpoint development:
+
+```bash
+koupper run examples/runtime-router-live-server.kts --serve
+```
+
+Then send requests from Postman/curl while the script is running.
+
+When stopping (`Ctrl+C`), Koupper sends a cancellation signal to the active execution. Your script should call `router.stop()` in a `finally` block so the endpoint server closes cleanly.

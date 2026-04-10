@@ -7,6 +7,7 @@ This page maps documentation walkthroughs to runnable source assets in the repos
 - Quick Smoke: `https://github.com/koupper-jvm/koupper/blob/develop/examples/hello-world.kts`
 - JSON run example: `https://github.com/koupper-jvm/koupper/blob/develop/examples/cli-report-generator.kts`
 - JSON payload sample: `https://github.com/koupper-jvm/koupper/blob/develop/examples/cli-report-generator.input.json`
+- Live runtime-router serve example: `https://github.com/koupper-jvm/koupper/blob/develop/examples/runtime-router-live-server.kts`
 
 ## Deployment examples
 
