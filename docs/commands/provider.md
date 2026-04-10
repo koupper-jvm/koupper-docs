@@ -46,7 +46,13 @@ Returns provider details:
 - If the catalog is missing, refresh local artifacts:
 
 ```bash
-kotlinc -script install.kts -- --force
+./scripts/setup/install.sh
+```
+
+Windows PowerShell:
+
+```powershell
+./scripts/setup/install.ps1
 ```
 
 `info` accepts any of the following identifiers:

@@ -14,7 +14,25 @@ This guide gets Koupper running quickly with the current local-first scaffolding
 ```bash
 git clone https://github.com/koupper-jvm/koupper.git
 cd koupper
-kotlinc -script install.kts
+./scripts/setup/install.sh
+```
+
+Windows PowerShell:
+
+```powershell
+git clone https://github.com/koupper-jvm/koupper.git
+cd koupper
+./scripts/setup/install.ps1
+```
+
+Optional dependency auto-install/update mode:
+
+```bash
+./scripts/setup/install.sh --auto-install-deps
+```
+
+```powershell
+./scripts/setup/install.ps1 -AutoInstallDeps
 ```
 
 Installer output provisions:
@@ -22,6 +40,7 @@ Installer output provisions:
 - `~/.koupper/bin`
 - `~/.koupper/libs`
 - `~/.koupper/templates/model-project`
+- `~/.koupper/catalog/providers.json`
 
 ## 2) Verify CLI
 
