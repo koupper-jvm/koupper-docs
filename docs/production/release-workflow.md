@@ -14,7 +14,8 @@ Koupper uses independent artifact tracks and stable tags.
 2. Run local quick checks for impacted modules before push.
 3. Run preflight checks for the feature branch.
 4. Run the release flow in dry-run mode.
-5. Run release flow to create PR, wait for CI, and merge only on `success`.
+5. For high-velocity `develop` delivery, use fast lane and let GitHub auto-merge after required checks.
+6. Use blocking CI wait/merge mode only when you need synchronous release control.
 
 ## Validation tiers
 
@@ -80,6 +81,8 @@ Fast-lane for `develop` PRs (create PR immediately, let GitHub auto-merge after 
 ```bash
 koupper run scripts/release/fast-lane.kts '{"featureBranch":"feature/my-change","enableAutoMerge":true}'
 ```
+
+If auto-merge is disabled in repository settings, use the same command with `"enableAutoMerge":false` and merge manually when checks pass.
 
 Before tagging, run the [Script Execution Checklist](/production/script-execution-checklist).
 
