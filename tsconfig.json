@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+      "esModuleInterop": true,
+      "isolatedModules": true,
+      "lib": ["ESNext", "DOM"],
+      "module": "ESNext",
+      "moduleResolution": "Node",
+      "noEmit": true,
+      "noImplicitReturns": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "resolveJsonModule": true,
+      "skipLibCheck": true,
+      "strict": true,
+      "target": "ESNext",
+      "useDefineForClassFields": true,
+      "jsx": "preserve",  // Preserva JSX para que Vite lo maneje
+      "baseUrl": ".",     // Define la base para la resolución de módulos
+      "paths": {
+        "@/*": ["docs/*"] // Esto ayuda a VitePress a reconocer imports relativos
+      }
+    },
+    "include": [
+      "docs/**/*.ts",
+      "docs/**/*.d.ts",
+      "docs/**/*.tsx",
+      "docs/**/*.vue",    // Incluye archivos .vue si estás usando componentes Vue
+      "docs/**/*.js"      // Incluye archivos JS si es necesario
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+  }
+  
