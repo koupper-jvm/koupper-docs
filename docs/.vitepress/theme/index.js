@@ -1,9 +1,8 @@
-import { h } from "vue";
-import DefaultLayout from "vitepress/theme";
-import IndexLayout from "./layouts/IndexLayout.vue";
+import DefaultTheme from "vitepress/theme";
 import "./custom.css";
+import Layout from "./Layout.vue";
 
 export default {
-  Layout: IndexLayout,
-  extends: DefaultLayout,
+  extends: DefaultTheme,
+  Layout,
 };

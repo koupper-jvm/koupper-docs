@@ -4,13 +4,25 @@
   "description": "koupper documentation",
   "main": "index.js",
   "scripts": {
-    "docs:dev": "vitepress dev docs",
+    "docs:dev": "vitepress dev docs --host",
     "docs:build": "vitepress build docs",
-    "docs:serve": "vitepress serve docs"
+    "docs:serve": "vitepress serve docs",
+    "docs:check": "node scripts/validate-source-map.js && node scripts/validate-providers-sync.js && node scripts/validate-cli-sync.js"
   },
   "author": "Jacob G. Acosta",
   "license": "ISC",
   "dependencies": {
+    "@codemirror/lang-java": "^6.0.1",
+    "@codemirror/language": "^6.10.3",
+    "@codemirror/theme-one-dark": "^6.1.2",
+    "axios": "^1.7.7",
+    "bootstrap": "^5.3.3",
+    "codemirror": "^6.0.1",
+    "gif-encoder-2": "^1.0.5",
+    "markdown-it": "^14.1.0",
+    "pngjs": "^7.0.0",
+    "puppeteer": "^24.40.0",
+    "thememirror": "^2.0.1",
     "vitepress": "^1.0.0-rc.45",
     "vue": "^3.4.21"
   }
