@@ -9,18 +9,19 @@ Symptoms:
 Fix:
 
 ```bash
-./scripts/setup/install.sh
-./scripts/setup/install.sh --doctor
+kotlinc -script install.kts -- --force
+kotlinc -script install.kts -- --doctor
 ```
 
 Windows PowerShell:
 
 ```powershell
-./scripts/setup/install.ps1
-./scripts/setup/install.ps1 -Doctor
+kotlinc -script install.kts -- --force
+kotlinc -script install.kts -- --doctor
 ```
 
 This refreshes local jars/templates and validates installation health.
+If local `koupper-cli` source is not available, installer fetches it automatically into `~/.koupper/cache/koupper-cli`.
 
 ## `job run-worker` shows `argument type mismatch`
 
@@ -32,7 +33,7 @@ Fix checklist:
 
 ```bash
 git checkout develop && git pull --ff-only origin develop
-./scripts/setup/install.sh
+kotlinc -script install.kts -- --force
 cd demo-jobs
 koupper job run-worker
 ```
@@ -48,13 +49,13 @@ koupper run examples/cli-report-generator.kts --json-file examples/cli-report-ge
 ## Verify local install quickly
 
 ```bash
-./scripts/setup/install.sh --doctor
+kotlinc -script install.kts -- --doctor
 ```
 
 Windows PowerShell:
 
 ```powershell
-./scripts/setup/install.ps1 -Doctor
+kotlinc -script install.kts -- --doctor
 ```
 
 `doctor` checks jars, bin shims, and local scaffolding template provisioning.
