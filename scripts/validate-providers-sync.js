@@ -7,8 +7,11 @@ const vitepressConfigPath = path.join(docsRoot, ".vitepress", "config.js");
 const providersDir = path.join(docsRoot, "providers");
 const catalogPathCandidates = [
   process.env.KOUPPER_PROVIDERS_CATALOG_PATH,
+  path.join(__dirname, "..", "koupper", "providers", "src", "main", "resources", "providers-catalog.json"),
   path.join(__dirname, "..", "..", "koupper", "providers", "src", "main", "resources", "providers-catalog.json"),
+  path.join(__dirname, "..", "koupper-core", "providers", "src", "main", "resources", "providers-catalog.json"),
   path.join(__dirname, "..", "koupper-core", "koupper", "providers", "src", "main", "resources", "providers-catalog.json"),
+  path.join(__dirname, "..", "..", "koupper-core", "providers", "src", "main", "resources", "providers-catalog.json"),
   path.join(__dirname, "..", "..", "koupper-core", "koupper", "providers", "src", "main", "resources", "providers-catalog.json"),
 ].filter(Boolean);
 
