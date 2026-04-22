@@ -5,8 +5,32 @@ const root = path.join(__dirname, "..");
 const cliCommandCandidates = [
   path.join(
     root,
+    "koupper-cli",
+    "src",
+    "main",
+    "kotlin",
+    "com",
+    "koupper",
+    "cli",
+    "commands",
+    "AvailableCommands.kt"
+  ),
+  path.join(
+    root,
     "..",
     "koupper-cli",
+    "src",
+    "main",
+    "kotlin",
+    "com",
+    "koupper",
+    "cli",
+    "commands",
+    "AvailableCommands.kt"
+  ),
+  path.join(
+    root,
+    "koupper-core",
     "src",
     "main",
     "kotlin",
