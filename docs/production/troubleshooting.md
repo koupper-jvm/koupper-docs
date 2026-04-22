@@ -21,6 +21,7 @@ kotlinc -script install.kts -- --doctor
 ```
 
 This refreshes local jars/templates and validates installation health.
+If local `koupper-cli` source is not available, installer fetches it automatically into `~/.koupper/cache/koupper-cli`.
 
 ## `job run-worker` shows `argument type mismatch`
 
