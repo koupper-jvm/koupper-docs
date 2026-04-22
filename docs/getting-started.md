@@ -15,6 +15,7 @@ Prerequisites:
 
 - Java 17 available on your `PATH`
 - Kotlin compiler (`kotlinc`) available on your `PATH`
+- Git available on your `PATH` (used by installer only when CLI cache is missing)
 
 ```bash
 git clone https://github.com/koupper-jvm/koupper.git
@@ -42,6 +43,8 @@ kotlinc -script install.kts -- --doctor
 
 If the doctor reports failures, run install again with `--force`.
 
+On first install, if local `koupper-cli` source is not present, the installer automatically fetches it into `~/.koupper/cache/koupper-cli`.
+
 Installer output provisions:
 
 - `~/.koupper/bin`
@@ -54,7 +57,7 @@ Installer output provisions:
 ```bash
 koupper -v
 koupper --help
-koupper run examples/hello-world.kts "Dev"
+koupper provider list
 ```
 
 ## 3) Generate your first module
