@@ -11,10 +11,15 @@ This guide gets Koupper running quickly with the current local-first scaffolding
 
 ## 1) Clone and install
 
+Prerequisites:
+
+- Java 17 available on your `PATH`
+- Kotlin compiler (`kotlinc`) available on your `PATH`
+
 ```bash
 git clone https://github.com/koupper-jvm/koupper.git
 cd koupper
-./scripts/setup/install.sh
+kotlinc -script install.kts -- --force
 ```
 
 Windows PowerShell:
@@ -22,18 +27,20 @@ Windows PowerShell:
 ```powershell
 git clone https://github.com/koupper-jvm/koupper.git
 cd koupper
-./scripts/setup/install.ps1
+kotlinc -script install.kts -- --force
 ```
 
-Optional dependency auto-install/update mode:
+Health check:
 
 ```bash
-./scripts/setup/install.sh --auto-install-deps
+kotlinc -script install.kts -- --doctor
 ```
 
 ```powershell
-./scripts/setup/install.ps1 -AutoInstallDeps
+kotlinc -script install.kts -- --doctor
 ```
+
+If the doctor reports failures, run install again with `--force`.
 
 Installer output provisions:
 
@@ -45,6 +52,7 @@ Installer output provisions:
 ## 2) Verify CLI
 
 ```bash
+koupper -v
 koupper --help
 koupper run examples/hello-world.kts "Dev"
 ```
