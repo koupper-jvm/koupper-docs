@@ -46,16 +46,18 @@ Returns provider details:
 - If the catalog is missing, refresh local artifacts:
 
 ```bash
-kotlinc -script install.kts -- --force
-kotlinc -script install.kts -- --doctor
+kotlinc -script install-standalone.kts -- --force
+kotlinc -script install-standalone.kts -- --doctor
 ```
 
 Windows PowerShell:
 
 ```powershell
-kotlinc -script install.kts -- --force
-kotlinc -script install.kts -- --doctor
+kotlinc -script .\install-standalone.kts -- --force
+kotlinc -script .\install-standalone.kts -- --doctor
 ```
+
+If you are running from a local cloned workspace, use `install.kts` in the repository root.
 
 `info` accepts any of the following identifiers:
 
