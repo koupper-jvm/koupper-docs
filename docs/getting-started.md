@@ -45,18 +45,18 @@ kotlinc -script .\install-standalone.kts -- --doctor
 Use this when you maintain release automation, docs, and CLI/runtime together.
 
 ```bash
-git clone https://github.com/koupper-jvm/koupper-infrastructure.git "koupper infrastructure"
-cd "koupper infrastructure"
+git clone https://github.com/koupper-jvm/koupper-workspace.git "koupper workspace"
+cd "koupper workspace"
 bash ./scripts/setup/workspace-bootstrap.sh --workspace "$(pwd)" --pull
 ```
 
 ```powershell
-git clone https://github.com/koupper-jvm/koupper-infrastructure.git "koupper infrastructure"
-cd "koupper infrastructure"
+git clone https://github.com/koupper-jvm/koupper-workspace.git "koupper workspace"
+cd "koupper workspace"
 ./scripts/setup/workspace-bootstrap.ps1 -Workspace (Get-Location).Path -Pull
 ```
 
-The bootstrap script clones/updates all required repositories (`koupper-infrastructure`, `koupper`, `koupper-cli`, `koupper-document`) and runs install + doctor automatically.
+The bootstrap script clones/updates all required repositories (`koupper-workspace`, `koupper`, `koupper-cli`, `koupper-document`) and runs install + doctor automatically.
 
 Health check:
 
