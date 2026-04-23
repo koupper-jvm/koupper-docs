@@ -40,6 +40,18 @@ kotlinc -script install-standalone.kts -- --doctor
 kotlinc -script .\install-standalone.kts -- --doctor
 ```
 
+If you are on an older release and `koupper module <name>` fails with
+`FileNotFoundException: .../.koupper/helpers/list.kts`, create missing runtime folders once:
+
+```bash
+mkdir -p "$HOME/.koupper/helpers" "$HOME/.koupper/logs"
+```
+
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.koupper\helpers" | Out-Null
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.koupper\logs" | Out-Null
+```
+
 ### Option B: Developers/maintainers (full workspace)
 
 Use this when you maintain release automation, docs, and CLI/runtime together.
@@ -61,11 +73,11 @@ The bootstrap script clones/updates all required repositories (`koupper-workspac
 Health check:
 
 ```bash
-kotlinc -script install.kts -- --doctor
+kotlinc -script ./koupper/install.kts -- --doctor
 ```
 
 ```powershell
-kotlinc -script .\install.kts -- --doctor
+kotlinc -script .\koupper\install.kts -- --doctor
 ```
 
 If the doctor reports failures, run install again with `--force`.
@@ -74,6 +86,8 @@ Both installers provision:
 
 - `~/.koupper/bin`
 - `~/.koupper/libs`
+- `~/.koupper/helpers`
+- `~/.koupper/logs`
 - `~/.koupper/templates/model-project`
 - `~/.koupper/catalog/providers.json`
 
