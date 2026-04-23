@@ -9,13 +9,42 @@ This guide gets Koupper running quickly with the current local-first scaffolding
 - provider catalog for infra/API integrations (GitHub, Docker, SSH, n8n, MCP, and more)
 - deploy + production hardening path without changing your script model
 
-## 1) Clone and install
+## 1) Install Koupper
 
 Prerequisites:
 
 - Java 17 available on your `PATH`
 - Kotlin compiler (`kotlinc`) available on your `PATH`
-- Git available on your `PATH` (used by installer only when CLI cache is missing)
+
+### Option A: End users (standalone, no repo clone)
+
+```bash
+curl -L -o install-standalone.kts https://github.com/koupper-jvm/koupper/releases/latest/download/install-standalone.kts
+kotlinc -script install-standalone.kts -- --force
+```
+
+Windows PowerShell:
+
+```powershell
+Invoke-WebRequest -Uri "https://github.com/koupper-jvm/koupper/releases/latest/download/install-standalone.kts" -OutFile "install-standalone.kts"
+kotlinc -script .\install-standalone.kts -- --force
+```
+
+Health check:
+
+```bash
+kotlinc -script install-standalone.kts -- --doctor
+```
+
+```powershell
+kotlinc -script .\install-standalone.kts -- --doctor
+```
+
+### Option B: Developers/maintainers (workspace source install)
+
+Use this mode when you actively maintain Koupper and need local source + build workflow.
+
+#### B1) Contributor workflow (single repo)
 
 ```bash
 git clone https://github.com/koupper-jvm/koupper.git
@@ -31,6 +60,22 @@ cd koupper
 kotlinc -script install.kts -- --force
 ```
 
+#### B2) Maintainer workflow (full workspace)
+
+Use this when you maintain release automation, docs, and CLI/runtime together.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/koupper-jvm/koupper-infrastructure/develop/scripts/setup/workspace-bootstrap.sh -o workspace-bootstrap.sh
+bash workspace-bootstrap.sh --workspace "$HOME/dev/koupper infrastructure" --pull
+```
+
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/koupper-jvm/koupper-infrastructure/develop/scripts/setup/workspace-bootstrap.ps1" -OutFile "workspace-bootstrap.ps1"
+./workspace-bootstrap.ps1 -Workspace "$HOME\dev\koupper infrastructure" -Pull
+```
+
+The bootstrap script clones/updates all required repositories (`koupper-infrastructure`, `koupper`, `koupper-cli`, `koupper-document`) and runs install + doctor automatically.
+
 Health check:
 
 ```bash
@@ -38,14 +83,12 @@ kotlinc -script install.kts -- --doctor
 ```
 
 ```powershell
-kotlinc -script install.kts -- --doctor
+kotlinc -script .\install.kts -- --doctor
 ```
 
 If the doctor reports failures, run install again with `--force`.
 
-On first install, if local `koupper-cli` source is not present, the installer automatically fetches it into `~/.koupper/cache/koupper-cli`.
-
-Installer output provisions:
+Both installers provision:
 
 - `~/.koupper/bin`
 - `~/.koupper/libs`

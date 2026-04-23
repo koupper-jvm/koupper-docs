@@ -5,9 +5,11 @@ Use this checklist to validate core script behavior before release.
 ## Prerequisites
 
 ```bash
-kotlinc -script install.kts -- --doctor
+kotlinc -script install-standalone.kts -- --doctor
 koupper help
 ```
+
+If you are validating from a local cloned maintainer workspace, run `kotlinc -script install.kts -- --doctor` from repo root.
 
 ## Core execution checks
 
