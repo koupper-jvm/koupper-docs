@@ -40,38 +40,20 @@ kotlinc -script install-standalone.kts -- --doctor
 kotlinc -script .\install-standalone.kts -- --doctor
 ```
 
-### Option B: Developers/maintainers (workspace source install)
-
-Use this mode when you actively maintain Koupper and need local source + build workflow.
-
-#### B1) Contributor workflow (single repo)
-
-```bash
-git clone https://github.com/koupper-jvm/koupper.git
-cd koupper
-kotlinc -script install.kts -- --force
-```
-
-Windows PowerShell:
-
-```powershell
-git clone https://github.com/koupper-jvm/koupper.git
-cd koupper
-kotlinc -script install.kts -- --force
-```
-
-#### B2) Maintainer workflow (full workspace)
+### Option B: Developers/maintainers (full workspace)
 
 Use this when you maintain release automation, docs, and CLI/runtime together.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/koupper-jvm/koupper-infrastructure/develop/scripts/setup/workspace-bootstrap.sh -o workspace-bootstrap.sh
-bash workspace-bootstrap.sh --workspace "$HOME/dev/koupper infrastructure" --pull
+git clone https://github.com/koupper-jvm/koupper-infrastructure.git "koupper infrastructure"
+cd "koupper infrastructure"
+bash ./scripts/setup/workspace-bootstrap.sh --workspace "$(pwd)" --pull
 ```
 
 ```powershell
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/koupper-jvm/koupper-infrastructure/develop/scripts/setup/workspace-bootstrap.ps1" -OutFile "workspace-bootstrap.ps1"
-./workspace-bootstrap.ps1 -Workspace "$HOME\dev\koupper infrastructure" -Pull
+git clone https://github.com/koupper-jvm/koupper-infrastructure.git "koupper infrastructure"
+cd "koupper infrastructure"
+./scripts/setup/workspace-bootstrap.ps1 -Workspace (Get-Location).Path -Pull
 ```
 
 The bootstrap script clones/updates all required repositories (`koupper-infrastructure`, `koupper`, `koupper-cli`, `koupper-document`) and runs install + doctor automatically.
