@@ -1,6 +1,6 @@
 # Runtime Router Provider
 
-`runtime-router` exposes runtime HTTP endpoints backed by script handlers.
+`runtime-router` exposes high-performance HTTP endpoints backed by script handlers.
 
 ## Service provider
 
@@ -8,26 +8,65 @@
 
 ## Contract and implementations
 
-- `RuntimeRouterProvider` -> `JdkRuntimeRouterProvider`
+- `RuntimeRouterProvider` -> **`GrizzlyRuntimeRouterProvider`** (Production Grade)
 
-## Environment variables
+## Performance & Robustness
 
-- None required by default.
+Powered by the **Grizzly NIO Engine**, Koupper's router is designed for high-concurrency production environments:
 
-## CLI discovery
+- **Non-blocking I/O**: Handles thousands of connections with a minimal thread pool.
+- **CORS & OPTIONS**: Built-in support for cross-origin requests.
+- **Zero-Burocracy**: Automatically extracts `body` from `ScriptResult` objects.
 
-```bash
-koupper provider info runtime-router
+## Usage: Auto-Discovery (Recommended)
+
+This is the "Zero-Config" way to build APIs. Annotate your scripts and let Koupper find them.
+
+### 1. Annotate your Script
+```kotlin
+@Export
+@WebRoute(path = "/api/v1/hello", method = RouteMethod.GET)
+val helloScript: (Unit) -> ScriptResult = {
+    ScriptResult.Ok(200, "HELLO_WORLD", mapOf("message" to "Hi from Koupper!"))
+}
 ```
 
-## Live endpoint script workflow
-
-Use the runtime-router provider with `koupper run --serve` for local endpoint development:
-
-```bash
-koupper run examples/runtime-router-live-server.kts --serve
+### 2. Boot the Router
+```kotlin
+fun main() {
+    val router = app.getInstance(RuntimeRouterProvider::class)
+    
+    // Automatically finds all @WebRoute annotated scripts in the package
+    router.autoDiscover("com.myproject.extensions")
+    
+    router.start(port = 3000)
+}
 ```
 
-Then send requests from Postman/curl while the script is running.
+## Usage: Manual Routing (DSL)
 
-When stopping (`Ctrl+C`), Koupper sends a cancellation signal to the active execution. Your script should call `router.stop()` in a `finally` block so the endpoint server closes cleanly.
+If you need fine-grained control, use the Routing DSL:
+
+```kotlin
+val router = app.getInstance(RuntimeRouterProvider::class)
+
+router.registerRouter {
+    path { "/api/v1" }
+    
+    get {
+        path { "/health" }
+        script { ::healthCheckScript }
+    }
+}
+```
+
+## Middleware Integration
+
+Register custom middlewares (e.g., Auth) that are automatically triggered by the `@Auth` annotation:
+
+```kotlin
+router.registerMiddleware("auth") { context ->
+    // Your security logic here
+    MiddlewareResult(allowed = true)
+}
+```
