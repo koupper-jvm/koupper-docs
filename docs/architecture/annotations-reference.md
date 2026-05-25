@@ -51,7 +51,7 @@ Use `@Export` as the execution entrypoint, then layer complementary annotations 
 - Main usage: define executable entrypoint for `koupper run` and runtime execution.
 
 ```kotlin
-import com.koupper.octopus.annotations.Export
+import com.koupper.shared.annotations.Export
 
 data class Input(val name: String)
 
