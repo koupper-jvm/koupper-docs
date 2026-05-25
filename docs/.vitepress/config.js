@@ -114,6 +114,7 @@ module.exports = {
         text: "Architecture",
         items: [
           { text: "Architecture Overview", link: "/architecture/" },
+          { text: "Web & API Production", link: "/architecture/web-production-architecture" },
           { text: "Script Execution Contract", link: "/architecture/script-execution-contract" },
           { text: "Annotations Reference", link: "/architecture/annotations-reference" },
           { text: "Script Execution Lifecycle", link: "/architecture/script-execution-lifecycle" },

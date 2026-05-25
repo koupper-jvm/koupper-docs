@@ -1,38 +1,30 @@
 # Script Execution Contract
 
-Koupper scripts follow a runtime contract to keep behavior predictable across local and production execution.
+Koupper scripts follow a strict runtime contract to keep behavior predictable across local and production execution.
 
-## Entrypoint rule
+## Entrypoint Rule
 
-- A `.kts` runtime script must declare exactly one `@Export` entrypoint.
-- Recommended entrypoint name: `setup`.
-- If no `@Export` is found, execution fails.
-- If multiple `@Export` declarations are found, execution fails with a clear error.
-- For complementary annotations around `@Export`, see [Annotations Reference](/architecture/annotations-reference).
+- A `.kts` or `.kt` script must declare exactly one **`@Export`** entrypoint.
+- The entrypoint is a function or a property holding a lambda.
 
-## Recommended shape
+## Web Integration Contract
+
+To expose a script as a production-grade HTTP endpoint, use the **`@WebRoute`** annotation alongside `@Export`:
 
 ```kotlin
 @Export
-val setup: (Input) -> Map<String, Any?> = { input ->
-    mapOf("ok" to true)
-}
+@WebRoute(path = "/my/route", method = RouteMethod.POST)
+val myScript = { input: MyRequest -> ... }
 ```
 
-## Pipeline usage
-
-- Run pipeline orchestration inside `setup`.
-- Use `dependsOn(...)` with property references (`::stepA`).
-- Use `async = false` for dependency-driven sequencing.
-
-## Provider-first execution
-
-- Runtime integrations should be resolved from container providers when available.
-- Avoid direct SDK/CLI integrations in scripts for capabilities that already exist as providers.
-- Keep local build commands project-local (Gradle/npm), separate from cloud action orchestration.
+### Automatic Metadata Processing
+When used in a Web context, the Koupper Runtime:
+1.  **Auto-discovers** scripts in the classpath.
+2.  **Analyzes** metadata (Auth, WebRoute).
+3.  **Binds** the script to the Grizzly NIO Engine.
 
 ## Why this contract matters
 
-- stable behavior between `koupper run`, workers, and deployed runtime routes,
-- lower migration friction from script prototypes to module services,
-- explicit and testable failure modes.
+- **Portability**: The same code works in `koupper run`, scheduled jobs, and high-performance APIs.
+- **Predictability**: Stable behavior between local and production execution.
+- **Maintenance**: Low friction when migrating from a simple script to a production service.
