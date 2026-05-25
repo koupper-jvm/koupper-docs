@@ -89,7 +89,7 @@ Before tagging, run the [Script Execution Checklist](/production/script-executio
 ## Tag examples
 
 ```bash
-git tag -a octopus-v6.3.1 -m "Octopus runtime release 6.3.1"
-git tag -a cli-v4.7.1 -m "Koupper CLI release 4.7.1"
+git tag -a octopus-v6.5.3 -m "Octopus runtime release 6.5.3"
+git tag -a cli-v4.8.0 -m "Koupper CLI release 4.8.0"
 git tag -a koupper-v1.2.1-monorepo -m "Koupper monorepo stable snapshot 1.2.1"
 ```
