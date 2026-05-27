@@ -20,6 +20,7 @@ koupper provider info <name>
 | --- | --- | --- |
 | [`ai`](/providers/ai) | `AIServiceProvider` | AI model integration provider (OpenAI by default). |
 | [`ai-llm-ops`](/providers/ai-llm-ops) | `AILlmOpsServiceProvider` | LLM operations with structured output, embeddings and tool-call helpers. |
+| [`agent`](/providers/agent) | `AgentServiceProvider` | Local-first autonomous agent orchestration provider with DSL and ReAct loop. |
 | [`aws-deploy`](/providers/aws-deploy) | `AwsDeployServiceProvider` | AWS deployment orchestration for preflight, Lambda, static sites, and API smoke tests. |
 | [`aws-dynamo`](/providers/aws-dynamo) | `AwsServiceProvider` | DynamoDB data access provider. |
 | [`aws-s3`](/providers/aws-s3) | `AwsS3ServiceProvider` | S3 storage provider for uploads and presigned flows. |
@@ -73,6 +74,7 @@ koupper provider info <name>
 - [SSH Provider](/providers/ssh)
 - [Terminal Runtime](/providers/terminal)
 - [GitHub Provider](/providers/github)
+- [Agent Provider](/providers/agent)
 - [AI Provider](/providers/ai)
 - [AI LLM Ops Provider](/providers/ai-llm-ops)
 - [AWS Deploy Provider](/providers/aws-deploy)
