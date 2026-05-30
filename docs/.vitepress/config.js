@@ -67,6 +67,7 @@ module.exports = {
           { text: "AgentCreatorAgent", link: "/agents/agent-creator" },
           { text: "RssFeedAgent", link: "/agents/rss-feed" },
           { text: "HeartbeatAgent", link: "/agents/heartbeat" },
+          { text: "TelegramBridgeAgent", link: "/agents/telegram-bridge" },
         ],
       },
       {
