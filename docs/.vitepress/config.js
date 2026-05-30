@@ -52,6 +52,24 @@ module.exports = {
         ],
       },
       {
+        text: "Agent Runtime",
+        items: [
+          { text: "worker", link: "/commands/worker" },
+          { text: "schedule", link: "/commands/schedule" },
+          { text: "doctor", link: "/commands/doctor" },
+        ],
+      },
+      {
+        text: "Agents",
+        items: [
+          { text: "Overview", link: "/agents/" },
+          { text: "GreetingAgent", link: "/agents/greeting" },
+          { text: "AgentCreatorAgent", link: "/agents/agent-creator" },
+          { text: "RssFeedAgent", link: "/agents/rss-feed" },
+          { text: "HeartbeatAgent", link: "/agents/heartbeat" },
+        ],
+      },
+      {
         text: "Providers",
         items: [
           { text: "Catalog", link: "/providers/" },
@@ -89,6 +107,17 @@ module.exports = {
           { text: "terminal", link: "/providers/terminal" },
           { text: "templates", link: "/providers/templates" },
           { text: "vector-db", link: "/providers/vector-db" },
+        ],
+      },
+      {
+        text: "Agentic Core",
+        items: [
+          { text: "Overview", link: "/agentic-core/" },
+          { text: "Agent DSL", link: "/agentic-core/agent-dsl" },
+          { text: "Hardware Profiler", link: "/agentic-core/hardware-profiler" },
+          { text: "Inference Engine", link: "/agentic-core/inference-engine" },
+          { text: "Control Plane", link: "/agentic-core/control-plane" },
+          { text: "Autonomy (ReAct & MCP)", link: "/agentic-core/autonomy-mcp" },
         ],
       },
       {
