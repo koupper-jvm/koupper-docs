@@ -52,6 +52,24 @@ module.exports = {
         ],
       },
       {
+        text: "Agent Runtime",
+        items: [
+          { text: "worker", link: "/commands/worker" },
+          { text: "schedule", link: "/commands/schedule" },
+          { text: "doctor", link: "/commands/doctor" },
+        ],
+      },
+      {
+        text: "Agents",
+        items: [
+          { text: "Overview", link: "/agents/" },
+          { text: "GreetingAgent", link: "/agents/greeting" },
+          { text: "AgentCreatorAgent", link: "/agents/agent-creator" },
+          { text: "RssFeedAgent", link: "/agents/rss-feed" },
+          { text: "HeartbeatAgent", link: "/agents/heartbeat" },
+        ],
+      },
+      {
         text: "Providers",
         items: [
           { text: "Catalog", link: "/providers/" },
