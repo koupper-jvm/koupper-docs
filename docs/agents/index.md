@@ -56,6 +56,7 @@ Every agent ships with a `skill.json` descriptor alongside it:
 | [AgentCreatorAgent](./agent-creator) | Interactive wizard — creates new agents with LLM | No |
 | [RssFeedAgent](./rss-feed) | Fetch RSS feeds, optional LLM summary | No |
 | [HeartbeatAgent](./heartbeat) | Proactive condition monitor, dispatches agents | No |
+| [TelegramBridgeAgent](./telegram-bridge) | Telegram ↔ CORTEX bidirectional bridge | Yes |
 
 ## Writing your own agent
 
