@@ -25,6 +25,11 @@ Use `@Export` as the execution entrypoint, then layer complementary annotations 
 
 - `@Auth`: marks auth-aware boundaries.
 - `@Authorize`: applies explicit authorization policy class.
+- `@Secret`: marks script parameters as sensitive — values are auto-redacted from stdout, logs, and TCP output.
+
+### 5) Contract and compatibility
+
+- `@KoupperVersion`: declares expected framework version. Script compilation fails if runtime version doesn't match.
 
 ### 5) Eventing complements
 
@@ -36,8 +41,10 @@ Use `@Export` as the execution entrypoint, then layer complementary annotations 
 | --- | --- | --- | --- |
 | `@Export` | script property/function | `RUNTIME` | Root execution entrypoint |
 | `@JobsListener` | script property | `SOURCE` | Worker loop listener configuration |
-| `@Scheduled` | script property | `SOURCE` | Schedule configuration for script-level jobs |
+| `@Scheduled` | script property | `SOURCE` | Schedule configuration for script-level jobs. Supports `chain` for pipeline chaining. |
 | `@Logger` | script property | `SOURCE` | Logger setup metadata |
+| `@Secret` | script property | `SOURCE` | Auto-redact sensitive parameter values from output |
+| `@KoupperVersion` | script property | `SOURCE` | Declare expected framework version |
 | `@Schedule` | function | `RUNTIME` | Function schedule at explicit datetime |
 | `@Timer` | function | `RUNTIME` | Repeated/timer function execution |
 | `@Auth` | class/function/property | `RUNTIME` | Mark auth-aware execution boundaries |
@@ -86,7 +93,7 @@ Parameters:
 
 - Target: property
 - Retention: source
-- Main usage: configure scheduled script execution.
+- Main usage: configure scheduled script execution. `@Scheduled` is a side-effect annotation — it does not block `@Export`, so a script can be both scheduled AND manually runnable.
 
 Parameters:
 
@@ -96,6 +103,16 @@ Parameters:
 - `debug: Boolean = false`
 - `delay: Long = 0L`
 - `at: String = ""`
+- `chain: String = ""` — pipeline chain (e.g., `"AgentB.kts > AgentC.kts"`). The worker automatically enqueues each stage after the previous one completes.
+
+Pipeline example:
+```kotlin
+@Scheduled(cron = "0 8 * * *", chain = "SummarizerAgent.kts > TelegramNotifyAgent.kts")
+@Export
+val digest: () -> Unit = {
+    // reads RSS feed — worker chains summarizer + telegram automatically
+}
+```
 
 ### Function orchestration complements
 
@@ -134,6 +151,43 @@ Parameters:
 - `stderrLevel: String = "ERROR"`
 
 ### Security complements
+
+#### `@Secret`
+
+- Target: function, property
+- Retention: source
+- Main usage: mark script parameters as sensitive. When present, all input parameter values are automatically redacted (`***`) from stdout, stderr, logs, and TCP output.
+
+```kotlin
+import com.koupper.shared.annotations.Secret
+
+@Secret
+@Export
+val setup: (String) -> String = { apiKey ->
+    println("Using key: $apiKey")  // stdout: "Using key: ***"
+    "authenticated"
+}
+```
+
+#### `@KoupperVersion`
+
+- Target: function, property
+- Retention: source
+- Main usage: declare the expected framework version. If the runtime version doesn't match the declared major.minor, compilation fails with a clear error message instead of cryptic `Unresolved reference` errors.
+
+```kotlin
+import com.koupper.shared.annotations.KoupperVersion
+
+@KoupperVersion("6.5")
+@Export
+val setup: () -> String = { "runs only on 6.5.x" }
+```
+
+The runtime version is also available as a top-level val:
+```kotlin
+@Export
+val setup: () -> String = { KOUPPER_VERSION }  // "6.5.3"
+```
 
 #### `@Auth`
 
