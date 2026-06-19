@@ -29,6 +29,40 @@ Optional:
 - `GITHUB_USER_AGENT` (default: `koupper-github-provider`)
 - `GITHUB_TIMEOUT_SECONDS` (default: `30`)
 
+## CLI discovery
+
+```bash
+koupper provider info github
+```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.github.GitHubClient
+import com.koupper.container.app
+
+@Export
+val createIssue: () -> String = {
+    val github = app.getInstance(GitHubClient::class)
+    
+    val issue = github.createIssue(
+        title = "Deploy failed in production",
+        body = "The latest deploy returned exit code 1. Check logs.",
+        labels = listOf("bug", "deploy")
+    )
+    "Issue created: ${issue.htmlUrl}"
+}
+
+@Export
+val checkCI: () -> String = {
+    val github = app.getInstance(GitHubClient::class)
+    val runs = github.listWorkflowRuns(branch = "main")
+    val latest = runs.firstOrNull()
+    if (latest != null) "Latest CI: ${latest.status} — ${latest.conclusion}" else "No runs found"
+}
+```
+
 ## Example script
 
 Koupper repo includes a runnable sample:
