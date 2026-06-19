@@ -70,3 +70,29 @@ router.registerMiddleware("auth") { context ->
     MiddlewareResult(allowed = true)
 }
 ```
+
+
+## CLI discovery
+
+```bash
+koupper provider info runtime-router
+```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.runtime.router.RuntimeRouterProvider
+import com.koupper.container.app
+
+@Export
+val registerEndpoint: () -> String = {
+    val router = app.getInstance(RuntimeRouterProvider::class)
+    router.registerRoute(
+        path = "/api/status",
+        method = "GET",
+        handler = { mapOf("status" to "ok", "version" to "2.3.1") }
+    )
+    "Route /api/status registered"
+}
+```

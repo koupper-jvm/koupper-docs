@@ -24,3 +24,19 @@ val relevant = memory.recall("deployment")
 ```bash
 koupper provider info memory
 ```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.memory.MemoryProvider
+import com.koupper.container.app
+
+@Export
+val rememberFact: () -> String = {
+    val mem = app.getInstance(MemoryProvider::class)
+    mem.remember("Deploy v2.3.1 completed at ${System.currentTimeMillis()}")
+    val results = mem.recall("deploy")
+    "Found ${results.size} relevant memories"
+}
+```

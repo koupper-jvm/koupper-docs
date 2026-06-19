@@ -40,6 +40,13 @@ if (failed.isNotEmpty()) {
 }
 ```
 
+
+## CLI discovery
+
+```bash
+koupper provider info job-ops
+```
+
 ## Usage example
 
 ```kotlin

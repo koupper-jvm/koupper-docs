@@ -43,3 +43,29 @@ The agent provider allows you to move from simple automation scripts to complex,
 ---
 
 [Back to Catalog](./)
+
+
+## CLI discovery
+
+```bash
+koupper provider info agent
+```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.agent.AgentOrchestrator
+import com.koupper.providers.agent.AgentMessage
+import com.koupper.container.app
+
+@Export
+val runAgent: () -> String = {
+    val orchestrator = app.getInstance(AgentOrchestrator::class)
+    val result = orchestrator.execute(
+        agent = "greeting",
+        messages = listOf(AgentMessage("user", "Hello, what can you do?"))
+    )
+    result.output
+}
+```

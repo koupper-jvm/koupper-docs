@@ -123,6 +123,13 @@ val logs = supervisor.logs(
 - `scripts/local-down.kts`
 - `scripts/local-logs.kts`
 
+
+## CLI discovery
+
+```bash
+koupper provider info process-supervisor
+```
+
 ## Usage example
 
 ```kotlin

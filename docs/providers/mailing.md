@@ -25,3 +25,22 @@
 ```bash
 koupper provider info mailing
 ```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.mailing.Sender
+import com.koupper.container.app
+
+@Export
+val sendAlert: () -> String = {
+    val mail = app.getInstance(Sender::class)
+    mail.send(
+        to = "ops@example.com",
+        subject = "Deploy completed",
+        body = "App v2.3.1 deployed to production at ${System.currentTimeMillis()}"
+    )
+    "Alert sent"
+}
+```
