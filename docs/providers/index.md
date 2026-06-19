@@ -24,6 +24,8 @@ koupper provider info <name>
 | [`aws-deploy`](/providers/aws-deploy) | `AwsDeployServiceProvider` | AWS deployment orchestration for preflight, Lambda, static sites, and API smoke tests. |
 | [`aws-dynamo`](/providers/aws-dynamo) | `AwsServiceProvider` | DynamoDB data access provider. |
 | [`aws-s3`](/providers/aws-s3) | `AwsS3ServiceProvider` | S3 storage provider for uploads and presigned flows. |
+| [`build`](/providers/build) | `BuildServiceProvider` | Gradle/npm builds with compiler output parsing for agent feedback loops. |
+| [`command-bridge`](/providers/command-bridge) | `CommandBridgeServiceProvider` | File-based command channel for interactive agent communication. |
 | [`command-runner`](/providers/command-runner) | `CommandRunnerServiceProvider` | Generic shell/binary command execution with timeout, dry-run, and masking support. |
 | [`crypto`](/providers/crypto) | `CryptoServiceProvider` | Symmetric encryption helpers. |
 | [`db`](/providers/db) | `DBServiceProvider` | Database connectors for PostgreSQL and SQLite sessions. |
@@ -34,25 +36,36 @@ koupper provider info <name>
 | [`hashing`](/providers/hashing) | `HasherServiceProvider` | Password hashing and verification utilities. |
 | [`http`](/providers/http) | `HttpServiceProvider` | HTTP invoker for outbound API requests. |
 | [`iac`](/providers/iac) | `IaCServiceProvider` | Terraform-based IaC planning/apply workflows with approval guardrails. |
+| [`interactive-browser`](/providers/interactive-browser) | `InteractiveBrowserServiceProvider` | Playwright-based browser automation with stealth anti-detection. |
 | [`job-ops`](/providers/job-ops) | `JobOpsServiceProvider` | Typed job queue status/list/run/failed/retry operations. |
 | [`jwt`](/providers/jwt) | `JWTServiceProvider` | JWT signing and validation utilities. |
 | [`k8s`](/providers/k8s) | `K8sServiceProvider` | Kubernetes operations provider over kubectl. |
 | [`logger`](/providers/logger) | `LoggerServiceProvider` | Database-backed application logger. |
 | [`local-e2e`](/providers/local-e2e) | `LocalE2EServiceProvider` | Local E2E runner for process, HTTP, jobs and persistence checks. |
+| [`lsp`](/providers/lsp) | `LspServiceProvider` | Language Server Protocol bridge for hover, go-to-definition, diagnostics. |
 | [`mailing`](/providers/mailing) | `SenderServiceProvider` | SMTP email sender utilities. |
 | [`mcp`](/providers/mcp) | `MCPServiceProvider` | Local MCP-style tool server endpoints for discovery and invocation. |
+| [`mcp-client`](/providers/mcp-client) | `MCPClientServiceProvider` | MCP client connecting to external servers over HTTP, stdio, or SSE. |
+| [`media-downloader`](/providers/media-downloader) | `MediaDownloaderServiceProvider` | Media download and audio extraction via yt-dlp/ffmpeg. |
+| [`memory`](/providers/memory) | `MemoryServiceProvider` | High-level agent memory: remember() and recall() for persistent context. |
 | [`n8n`](/providers/n8n) | `N8NServiceProvider` | Trigger n8n workflows and poll execution status. |
 | [`notifications`](/providers/notifications) | `NotificationsServiceProvider` | Console or webhook operational notifications. |
 | [`observability`](/providers/observability) | `ObservabilityServiceProvider` | Metrics, events and trace sink abstraction with local backend. |
+| [`pdf-reader`](/providers/pdf-reader) | `PDFReaderServiceProvider` | PDF document text extraction and page splitting via Apache PDFBox. |
 | [`process-supervisor`](/providers/process-supervisor) | `ProcessSupervisorServiceProvider` | Local detached process management with persisted metadata, logs and health checks. |
 | [`queue-ops`](/providers/queue-ops) | `QueueOpsServiceProvider` | Local pending/requeue/dead-letter queue operations. |
 | [`rss`](/providers/rss) | `RSSServiceProvider` | RSS feed reader provider. |
 | [`runtime-router`](/providers/runtime-router) | `RuntimeRouterServiceProvider` | Runtime HTTP route registration and serving provider. |
 | [`secrets`](/providers/secrets) | `SecretsServiceProvider` | Secret retrieval from env and local JSON backends. |
+| [`speech-to-text`](/providers/speech-to-text) | `SpeechToTextServiceProvider` | Audio transcription via local whisper-cpp or OpenAI/Groq Whisper API. |
 | [`ssh`](/providers/ssh) | `SSHServiceProvider` | Remote SSH command execution and file transfer workflows. |
+| [`telegram`](/providers/telegram) | `TelegramServiceProvider` | Bidirectional Telegram Bot API channel for agent communication. |
 | [`templates`](/providers/templates) | `TemplateServiceProvider` | Template rendering provider. |
 | [`terminal`](/providers/terminal) | `TerminalRuntime` | Interactive terminal IO bridge for prompt/print during script execution. |
 | [`vector-db`](/providers/vector-db) | `VectorDbServiceProvider` | Vector storage and similarity query provider. |
+| [`vision`](/providers/vision) | `VisionServiceProvider` | Vision-capable LLM for image analysis via OpenAI-compatible API. |
+| [`web-reader`](/providers/web-reader) | `WebReaderServiceProvider` | Playwright web page reader with JavaScript rendering and screenshots. |
+| [`web-search`](/providers/web-search) | `WebSearchServiceProvider` | Web search via DuckDuckGo — no API key required. |
 
 ## Deep dives
 
