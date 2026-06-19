@@ -34,3 +34,22 @@ fun list(): Set<String>            // returns all known keys from the active bac
 ```bash
 koupper provider info secrets
 ```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.secrets.SecretsClient
+import com.koupper.container.app
+
+@Export
+val useSecrets: () -> String = {
+    val secrets = app.getInstance(SecretsClient::class)
+    
+    val apiKey = secrets.getOrNull("API_KEY") ?: return@useSecrets "API_KEY not configured"
+    val config = secrets.getJson("deploy_config")
+    val env = config["environment"] as? String ?: "unknown"
+    
+    "Using key for $env: ${apiKey.take(4)}***"
+}
+```
