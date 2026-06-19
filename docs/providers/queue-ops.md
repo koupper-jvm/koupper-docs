@@ -19,3 +19,22 @@
 ```bash
 koupper provider info queue-ops
 ```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.queueops.QueueOpsProvider
+import com.koupper.container.app
+
+@Export
+val inspectQueues: () -> Map<String, Int> = {
+    val queues = app.getInstance(QueueOpsProvider::class)
+    
+    mapOf(
+        "pending" to queues.pendingCount("default"),
+        "failed" to queues.failedCount("default"),
+        "dead" to queues.deadLetterCount("default")
+    )
+}
+```

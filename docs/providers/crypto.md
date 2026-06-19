@@ -19,3 +19,18 @@
 ```bash
 koupper provider info crypto
 ```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.crypto.Crypt0
+import com.koupper.container.app
+
+@Export
+val encryptData: () -> String = {
+    val crypto = app.getInstance(Crypt0::class)
+    val encrypted = crypto.encrypt("sensitive payload")
+    "Encrypted: ${encrypted.take(20)}..."
+}
+```
