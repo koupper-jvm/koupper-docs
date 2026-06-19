@@ -6,10 +6,11 @@ This section describes how Koupper behaves as a runtime platform, not only as a 
 
 1. [Script Execution Contract](/architecture/script-execution-contract)
 2. [Annotations Reference](/architecture/annotations-reference)
-3. [Script Execution Lifecycle](/architecture/script-execution-lifecycle)
-4. [Runtime Topology](/architecture/runtime-topology)
-5. [Provider Runtime Contract](/architecture/provider-runtime-contract)
-6. [Local-first Scaffolding](/architecture/local-first-scaffolding)
+3. [Pipelines](/architecture/pipelines)
+4. [Script Execution Lifecycle](/architecture/script-execution-lifecycle)
+5. [Runtime Topology](/architecture/runtime-topology)
+6. [Provider Runtime Contract](/architecture/provider-runtime-contract)
+7. [Local-first Scaffolding](/architecture/local-first-scaffolding)
 
 ## Scope
 
