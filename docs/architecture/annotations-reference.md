@@ -12,6 +12,7 @@ Use `@Export` as the execution entrypoint, then layer complementary annotations 
 
 ### 2) Runtime behavior complements
 
+- `@WebRoute`: HTTP endpoint binding for scripts (path + method).
 - `@JobsListener`: worker listener behavior.
 - `@Scheduled`: scheduled script behavior.
 - `@Logger`: script-level logging configuration metadata.
@@ -40,6 +41,7 @@ Use `@Export` as the execution entrypoint, then layer complementary annotations 
 | Annotation | Typical target | Retention | Primary use |
 | --- | --- | --- | --- |
 | `@Export` | script property/function | `RUNTIME` | Root execution entrypoint |
+| `@WebRoute` | script property | `RUNTIME` | HTTP endpoint binding with path and method |
 | `@JobsListener` | script property | `SOURCE` | Worker loop listener configuration |
 | `@Scheduled` | script property | `SOURCE` | Schedule configuration for script-level jobs. Supports `chain` for pipeline chaining. |
 | `@Logger` | script property | `SOURCE` | Logger setup metadata |
@@ -72,6 +74,28 @@ Rules:
 
 - A runtime `.kts` script should expose exactly one active `@Export` entrypoint.
 - Missing or multiple exported entrypoints produce execution errors.
+
+#### `@WebRoute`
+
+- Target: property
+- Retention: runtime
+- Main usage: bind a script to an HTTP endpoint. Works alongside `@Export` to expose scripts as web handlers.
+
+Parameters:
+
+- `path: String = ""` — URL path (e.g., `"/api/users"`)
+- `method: RouteMethod = RouteMethod.GET` — HTTP method
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.shared.annotations.WebRoute
+
+@WebRoute(path = "/api/hello", method = RouteMethod.GET)
+@Export
+val hello: () -> Map<String, Any?> = {
+    mapOf("status" to "ok", "message" to "hello from koupper")
+}
+```
 
 ## Complements for `@Export`
 
