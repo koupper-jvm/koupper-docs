@@ -43,3 +43,28 @@ val result = e2e.runAll(
 ## Script example
 
 - `scripts/local-e2e-demo.kts`
+
+
+## CLI discovery
+
+```bash
+koupper provider info local-e2e
+```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.locale2e.LocalE2E
+import com.koupper.container.app
+
+@Export
+val runHealthCheck: () -> String = {
+    val e2e = app.getInstance(LocalE2E::class)
+    
+    val httpOk = e2e.checkHttp("http://localhost:8080/health")
+    val jobsOk = e2e.checkJobs(queue = "default", maxPending = 10)
+    
+    if (httpOk && jobsOk) "All checks passed" else "Health check failed"
+}
+```

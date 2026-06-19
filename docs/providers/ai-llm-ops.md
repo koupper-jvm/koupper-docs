@@ -20,3 +20,21 @@
 ```bash
 koupper provider info ai-llm-ops
 ```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.aillmops.AILlmOpsProvider
+import com.koupper.container.app
+
+@Export
+val structuredOutput: () -> String = {
+    val llm = app.getInstance(AILlmOpsProvider::class)
+    val result = llm.chat(
+        messages = listOf(mapOf("role" to "user", "content" to "List 3 colors")),
+        responseSchema = mapOf("type" to "array", "items" to mapOf("type" to "string"))
+    )
+    result.content
+}
+```

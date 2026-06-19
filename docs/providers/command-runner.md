@@ -60,6 +60,13 @@ val result = runner.runChecked(
   - `executable` + `args`
 - `runChecked` throws if exit code is non-zero.
 
+
+## CLI discovery
+
+```bash
+koupper provider info command-runner
+```
+
 ## Usage example
 
 ```kotlin

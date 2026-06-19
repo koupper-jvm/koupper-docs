@@ -20,3 +20,21 @@ Audio transcription with two backends: local whisper-cpp CLI or OpenAI/Groq Whis
 ```bash
 koupper provider info speech-to-text
 ```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.stt.SpeechToTextProvider
+import com.koupper.container.app
+
+@Export
+val transcribeAudio: () -> String = {
+    val stt = app.getInstance(SpeechToTextProvider::class, "local")
+    val result = stt.transcribe(
+        audioPath = "recordings/meeting.wav",
+        model = "base"
+    )
+    "Transcription: ${result.text.take(100)}..."
+}
+```
