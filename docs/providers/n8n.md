@@ -39,3 +39,24 @@ koupper provider info n8n
 ## Example guide
 
 - [n8n Workflow Example](/examples/n8n-workflow)
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.n8n.N8NProvider
+import com.koupper.container.app
+
+@Export
+val triggerWorkflow: () -> String = {
+    val n8n = app.getInstance(N8NProvider::class)
+    
+    val execution = n8n.trigger(
+        webhookPath = "/webhook/deploy-notify",
+        payload = mapOf("service" to "api", "version" to "2.3.1")
+    )
+    
+    if (execution.status == "completed") "Workflow completed"
+    else "Workflow status: ${execution.status}"
+}
+```

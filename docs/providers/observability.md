@@ -29,3 +29,23 @@ This happens without any configuration in the script itself. If the provider is 
 ```bash
 koupper provider info observability
 ```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.observability.ObservabilityProvider
+import com.koupper.container.app
+
+@Export
+val trackDeploy: () -> String = {
+    val obs = app.getInstance(ObservabilityProvider::class)
+    
+    obs.emitEvent("deploy.started", mapOf("version" to "2.3.1"))
+    // ... deployment logic ...
+    obs.emitMetric("deploy.duration", 45000, mapOf("status" to "ok"))
+    obs.emitEvent("deploy.completed", mapOf("version" to "2.3.1"))
+    
+    "Metrics emitted"
+}
+```
