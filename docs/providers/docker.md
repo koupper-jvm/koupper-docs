@@ -37,3 +37,35 @@ data class DockerCommandResult(
 ```bash
 koupper provider info docker
 ```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.docker.DockerClient
+import com.koupper.container.app
+
+@Export
+val buildAndRun: () -> String = {
+    val docker = app.getInstance(DockerClient::class)
+    
+    // Build an image
+    docker.build("myapp:latest", contextDir = ".")
+    
+    // Run a container
+    val result = docker.run(
+        image = "myapp:latest",
+        containerName = "myapp-prod",
+        ports = mapOf(8080 to 8080),
+        env = mapOf("NODE_ENV" to "production")
+    )
+    "Container ${result.containerId} started"
+}
+
+@Export
+val checkContainers: () -> List<String> = {
+    val docker = app.getInstance(DockerClient::class)
+    docker.listContainers(showAll = true)
+        .map { "${it.name} — ${it.status}" }
+}
+```
