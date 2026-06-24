@@ -14,6 +14,7 @@ Koupper CLI commands are organized around one flow: scaffold, run, evolve, opera
 | Infrastructure | [`koupper infra`](/commands/infra) | Run Terraform lifecycle commands with stable JSON output. |
 | Reconcile | [`koupper reconcile`](/commands/reconcile) | Orchestrate infra, preflight, deploy, smoke, and rollback stages. |
 | Capability discovery | [`koupper provider`](/commands/provider) | List providers and inspect contracts + env requirements. |
+| Hot Reloading | [`koupper reload`](/commands/reload) | Vacía y recarga los plugins/providers en vivo sin apagar el demonio. |
 
 ## Typical lifecycle
 

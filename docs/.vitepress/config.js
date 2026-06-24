@@ -49,6 +49,7 @@ module.exports = {
           { text: "job", link: "/commands/job" },
           { text: "deploy", link: "/commands/deploy" },
           { text: "provider", link: "/commands/provider" },
+          { text: "reload", link: "/commands/reload" },
         ],
       },
       {
@@ -114,6 +115,7 @@ module.exports = {
         text: "Architecture",
         items: [
           { text: "Architecture Overview", link: "/architecture/" },
+          { text: "v7 Engine", link: "/architecture/v7-engine" },
           { text: "Web & API Production", link: "/architecture/web-production-architecture" },
           { text: "Script Execution Contract", link: "/architecture/script-execution-contract" },
           { text: "Annotations Reference", link: "/architecture/annotations-reference" },
