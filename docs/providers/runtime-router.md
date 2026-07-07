@@ -1,3 +1,4 @@
+
 # Runtime Router Provider
 
 `runtime-router` exposes high-performance HTTP endpoints backed by script handlers.
@@ -55,7 +56,30 @@ router.registerRouter {
     
     get {
         path { "/health" }
-        script { ::healthCheckScript }
+        script { { mapOf("status" to "UP") } }
+    }
+}
+```
+
+## Extracting Path Variables
+
+When using path variables (e.g. `(?<slug>[^/]+)` or `{id}`), Koupper automatically extracts them and populates the `pathParams` map inside the globally available `RequestContext`.
+
+```kotlin
+import com.koupper.shared.runtime.GlobalRouteRegistry
+import com.koupper.providers.runtime.router.RequestContext
+
+router.registerRouter {
+    get {
+        path { "/api/v1/blog/posts/(?<slug>[^/]+)" }
+        script {
+            { 
+                val reqCtx = GlobalRouteRegistry.currentRequest.get() as RequestContext
+                val slug = reqCtx.pathParams["slug"] ?: ""
+                
+                mapOf("article_slug" to slug) 
+            }
+        }
     }
 }
 ```
@@ -70,3 +94,4 @@ router.registerMiddleware("auth") { context ->
     MiddlewareResult(allowed = true)
 }
 ```
+
