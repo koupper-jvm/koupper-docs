@@ -24,3 +24,34 @@
 ```bash
 koupper provider info aws-s3
 ```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.aws.s3.S3Client
+import com.koupper.container.app
+
+@Export
+val uploadArtifact: () -> String = {
+    val s3 = app.getInstance(S3Client::class)
+    val bucket = System.getenv("QUIZZTEA_S3_BUCKET")
+    
+    s3.upload(
+        bucket = bucket,
+        key = "builds/app-${System.currentTimeMillis()}.jar",
+        file = java.io.File("build/libs/app.jar")
+    )
+    "Uploaded to s3://$bucket/builds/"
+}
+
+@Export
+val getPresignedUrl: () -> String = {
+    val s3 = app.getInstance(S3Client::class)
+    s3.presignedUrl(
+        bucket = System.getenv("QUIZZTEA_S3_BUCKET"),
+        key = "reports/summary.pdf",
+        expirationMinutes = 60
+    )
+}
+```

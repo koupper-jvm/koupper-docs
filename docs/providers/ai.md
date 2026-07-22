@@ -22,3 +22,24 @@
 ```bash
 koupper provider info ai
 ```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.ai.AI
+import com.koupper.container.app
+
+@Export
+val askAI: () -> String = {
+    val ai = app.getInstance(AI::class)
+    
+    val response = ai.chat(
+        messages = listOf(
+            mapOf("role" to "system", "content" to "You are a helpful assistant."),
+            mapOf("role" to "user", "content" to "Explain what Koupper is in one sentence.")
+        )
+    )
+    response.content
+}
+```
