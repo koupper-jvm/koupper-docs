@@ -1,6 +1,6 @@
 # Arquitectura del Motor (v7 Engine)
 
-A partir de la versión 7.0.0, Koupper introduce mejoras estructurales significativas en el *Octopus Runtime* para manejar cargas de trabajo empresariales y garantizar una estabilidad superior en entornos críticos.
+A partir de la versión 7.0.0, Koupper introduce mejoras estructurales significativas en el *Octopus Runtime* para manejar cargas de trabajo empresariales y garantizar una estabilidad superior en entornos críticos. El release comunitario actual es **7.2.0+** (Runtime Router CORS DSL, jobs compilados, y mejoras de DX en `koupper module`).
 
 ## 1. Process Sandboxing (Aislamiento de Fallos)
 

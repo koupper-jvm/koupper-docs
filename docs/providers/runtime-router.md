@@ -16,8 +16,30 @@
 Powered by the **Grizzly NIO Engine**, Koupper's router is designed for high-concurrency production environments:
 
 - **Non-blocking I/O**: Handles thousands of connections with a minimal thread pool.
-- **CORS & OPTIONS**: Built-in support for cross-origin requests.
+- **CORS & OPTIONS**: Built-in cross-origin support with multi-origin allow lists (see [CORS](#cors); **7.2.0+**).
 - **Zero-Burocracy**: Automatically extracts `body` from `ScriptResult` objects.
+
+## CORS
+
+Configure allowed origins on the router inside `registerRouter { ... }` (list form supported; **Octopus 7.2.0+**):
+
+```kotlin
+router.registerRouter {
+    cors {
+        allowedOrigins = listOf(
+            "http://localhost:5173",
+            "https://app.example.com"
+        )
+    }
+
+    get {
+        path { "/api/health" }
+        script { { mapOf("status" to "UP") } }
+    }
+}
+```
+
+**Behavior:** if the request `Origin` header matches an allowed entry, the response echoes **that** origin in `Access-Control-Allow-Origin`. Browsers reject a comma-joined allow list, so Koupper never joins multiple origins into one header. Use `allowedOrigins = listOf("*")` only when intentionally wide-open.
 
 ## Usage: Auto-Discovery (Recommended)
 
