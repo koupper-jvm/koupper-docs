@@ -38,3 +38,36 @@ koupper job run-worker
 - Use `--jobId` to replay one specific task when debugging.
 - Job execution traces are also written to `~/.koupper/logs/octopus-executions.jsonl`.
 - Helper payload files in `~/.koupper/helpers` are generated only by commands that explicitly report payload snapshots (for example module analysis).
+
+## V7 programmatic jobs (in-module)
+
+Dispatch work to the local job queue from Kotlin (compiled module or script):
+
+```kotlin
+::processDiagnosis.asJob(
+    mapOf("ticketId" to ticketId)
+).dispatchToQueue()
+```
+
+Orchestrate steps inside a module or script:
+
+```kotlin
+ScriptExecutor.runPipeline(
+    listOf(
+        ::step1,
+        ::step2.dependsOn(::step1)
+    ),
+    async = false
+)
+```
+
+Use `dependsOn()` to declare ordering; the worker runs pipeline steps in dependency order. Set `async = false` when you need the caller to block until the pipeline finishes (for example inside `@Export setup`).
+
+### Success vs failure semantics
+
+- A job lands in **done** when the function returns normally — even if you return an `OperationResponse(500)`.
+- To mark **failed**, **throw** (or rethrow) from the job function.
+
+### Working directory
+
+`dispatchToQueue()` resolves paths from the **JVM working directory**. In IntelliJ, set Run Configuration **Working Directory** to the module root (not the parent multi-project folder).
