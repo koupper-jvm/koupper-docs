@@ -1,5 +1,7 @@
 # Getting Started
 
+> Current community release: **v7.2.0** ([GitHub Release](https://github.com/koupper-jvm/koupper/releases/tag/v7.2.0)).
+
 This guide gets Koupper running quickly with the current local-first scaffolding flow.
 
 ## What you get with Koupper
@@ -11,10 +13,11 @@ This guide gets Koupper running quickly with the current local-first scaffolding
 
 ## 1) Install Koupper
 
-Prerequisites:
+### Prerequisites
 
-- Java 17 available on your `PATH`
-- Kotlin compiler (`kotlinc`) available on your `PATH`
+- **Java 17+** (`java -version`)
+- **Kotlin compiler** (`kotlinc -version`) — required to run `install-standalone.kts`
+- ~350 MB free disk for `octopus.jar`
 
 ### Option A: End users (standalone, no repo clone)
 
@@ -68,16 +71,16 @@ cd "koupper workspace"
 ./scripts/setup/workspace-bootstrap.ps1 -Workspace (Get-Location).Path -Pull
 ```
 
-The bootstrap script clones/updates all required repositories (`koupper-workspace`, `koupper`, `koupper-cli`, `koupper-document`) and runs install + doctor automatically.
+The bootstrap script clones/updates all required repositories (`koupper`, `koupper-cli`, `koupper-docs`) and runs install + doctor automatically.
 
-Health check:
+Health check (from workspace root):
 
 ```bash
-kotlinc -script ./koupper/install.kts -- --doctor
+kotlinc -script install-workspace.kts -- --doctor
 ```
 
 ```powershell
-kotlinc -script .\koupper\install.kts -- --doctor
+kotlinc -script .\install-workspace.kts -- --doctor
 ```
 
 If the doctor reports failures, run install again with `--force`.
