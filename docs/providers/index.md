@@ -34,6 +34,7 @@ koupper provider info <name>
 | [`git`](/providers/git) | `GitServiceProvider` | Local Git repository automation with safe commit defaults. |
 | [`github`](/providers/github) | `GitHubServiceProvider` | GitHub API operations for issues, pull requests, checks and workflows. |
 | [`hashing`](/providers/hashing) | `HasherServiceProvider` | Password hashing and verification utilities. |
+| [`helloworld`](/providers/helloworld) | `HelloWorldServiceProvider` | Example Hello World provider for scaffolding demonstration. |
 | [`http`](/providers/http) | `HttpServiceProvider` | HTTP invoker for outbound API requests. |
 | [`iac`](/providers/iac) | `IaCServiceProvider` | Terraform-based IaC planning/apply workflows with approval guardrails. |
 | [`interactive-browser`](/providers/interactive-browser) | `InteractiveBrowserServiceProvider` | Playwright-based browser automation with stealth anti-detection. |
@@ -66,6 +67,7 @@ koupper provider info <name>
 | [`vision`](/providers/vision) | `VisionServiceProvider` | Vision-capable LLM for image analysis via OpenAI-compatible API. |
 | [`web-reader`](/providers/web-reader) | `WebReaderServiceProvider` | Playwright web page reader with JavaScript rendering and screenshots. |
 | [`web-search`](/providers/web-search) | `WebSearchServiceProvider` | Web search via DuckDuckGo — no API key required. |
+| [`youtube`](/providers/youtube) | `YoutubeTranscriptServiceProvider` | Fetches auto-generated transcripts from YouTube videos via the timedtext API. |
 
 ## Deep dives
 

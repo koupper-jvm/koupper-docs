@@ -1,3 +1,4 @@
+
 # Runtime Router Provider
 
 `runtime-router` exposes high-performance HTTP endpoints backed by script handlers.
@@ -15,8 +16,30 @@
 Powered by the **Grizzly NIO Engine**, Koupper's router is designed for high-concurrency production environments:
 
 - **Non-blocking I/O**: Handles thousands of connections with a minimal thread pool.
-- **CORS & OPTIONS**: Built-in support for cross-origin requests.
+- **CORS & OPTIONS**: Built-in cross-origin support with multi-origin allow lists (see [CORS](#cors); **7.2.0+**).
 - **Zero-Burocracy**: Automatically extracts `body` from `ScriptResult` objects.
+
+## CORS
+
+Configure allowed origins on the router inside `registerRouter { ... }` (list form supported; **Octopus 7.2.0+**):
+
+```kotlin
+router.registerRouter {
+    cors {
+        allowedOrigins = listOf(
+            "http://localhost:5173",
+            "https://app.example.com"
+        )
+    }
+
+    get {
+        path { "/api/health" }
+        script { { mapOf("status" to "UP") } }
+    }
+}
+```
+
+**Behavior:** if the request `Origin` header matches an allowed entry, the response echoes **that** origin in `Access-Control-Allow-Origin`. Browsers reject a comma-joined allow list, so Koupper never joins multiple origins into one header. Use `allowedOrigins = listOf("*")` only when intentionally wide-open.
 
 ## Usage: Auto-Discovery (Recommended)
 
@@ -55,7 +78,30 @@ router.registerRouter {
     
     get {
         path { "/health" }
-        script { ::healthCheckScript }
+        script { { mapOf("status" to "UP") } }
+    }
+}
+```
+
+## Extracting Path Variables
+
+When using path variables (e.g. `(?<slug>[^/]+)` or `{id}`), Koupper automatically extracts them and populates the `pathParams` map inside the globally available `RequestContext`.
+
+```kotlin
+import com.koupper.shared.runtime.GlobalRouteRegistry
+import com.koupper.providers.runtime.router.RequestContext
+
+router.registerRouter {
+    get {
+        path { "/api/v1/blog/posts/(?<slug>[^/]+)" }
+        script {
+            { 
+                val reqCtx = GlobalRouteRegistry.currentRequest.get() as RequestContext
+                val slug = reqCtx.pathParams["slug"] ?: ""
+                
+                mapOf("article_slug" to slug) 
+            }
+        }
     }
 }
 ```
@@ -70,7 +116,6 @@ router.registerMiddleware("auth") { context ->
     MiddlewareResult(allowed = true)
 }
 ```
-
 
 ## CLI discovery
 
