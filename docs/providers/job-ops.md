@@ -39,3 +39,28 @@ if (failed.isNotEmpty()) {
     jobs.retry(context = ".", configId = "default", jobId = failed.first().id)
 }
 ```
+
+
+## CLI discovery
+
+```bash
+koupper provider info job-ops
+```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.jobops.JobOps
+import com.koupper.container.app
+
+@Export
+val retryFailed: () -> String = {
+    val jobs = app.getInstance(JobOps::class)
+    
+    val failed = jobs.listFailed(queue = "default")
+    failed.forEach { job -> jobs.retry(job.id) }
+    
+    "Retried ${failed.size} failed jobs"
+}
+```

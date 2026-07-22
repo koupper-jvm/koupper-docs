@@ -15,6 +15,18 @@ Koupper CLI commands are organized around one flow: scaffold, run, evolve, opera
 | Reconcile | [`koupper reconcile`](/commands/reconcile) | Orchestrate infra, preflight, deploy, smoke, and rollback stages. |
 | Capability discovery | [`koupper provider`](/commands/provider) | List providers and inspect contracts + env requirements. |
 | Hot Reloading | [`koupper reload`](/commands/reload) | Vacía y recarga los plugins/providers en vivo sin apagar el demonio. |
+| Build | [`koupper build`](/commands/build) | Run the module's init.kts build script. |
+| Project watcher | [`koupper watch`](/commands/watch) | Auto-detect providers and sync Gradle dependencies. |
+
+## Agent runtime commands
+
+| Command | Purpose |
+| --- | --- |
+| [`koupper agent`](/commands/agent) | Manage installed agents: list, info, install, remove. |
+| [`koupper worker`](/commands/worker) | Background job worker daemon — polls queues, executes agent scripts. |
+| [`koupper worker --status`](/commands/worker#snapshot-queue-status-without-starting-the-daemon) | Print queue snapshot (pending/processing/failed/dead) and exit. |
+| [`koupper schedule`](/commands/schedule) | Manage recurring agent schedules (cron, rate, once). |
+| [`koupper doctor`](/commands/doctor) | Diagnose the runtime: env vars, ports, queues, agents, schedules. |
 
 ## Typical lifecycle
 

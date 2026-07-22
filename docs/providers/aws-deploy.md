@@ -117,3 +117,33 @@ val smoke = deploy.smokeTestApis(
 2. Build artifacts locally (Gradle/npm).
 3. Deploy via provider APIs, not direct AWS CLI calls in scripts.
 4. Execute smoke checks before marking rollout complete.
+
+
+## CLI discovery
+
+```bash
+koupper provider info aws-deploy
+```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.aws.deploy.AwsDeployProvider
+import com.koupper.container.app
+
+@Export
+val deployLambda: () -> String = {
+    val deploy = app.getInstance(AwsDeployProvider::class)
+    
+    val preflight = deploy.preflight()
+    if (!preflight.ok) return@deployLambda "Preflight failed: ${preflight.errors}"
+    
+    val result = deploy.deployLambda(
+        functionName = "my-api",
+        zipPath = "build/lambda.zip",
+        timeoutSeconds = 120
+    )
+    if (result.ok) "Deployed in ${result.durationMs}ms" else "Deploy failed"
+}
+```

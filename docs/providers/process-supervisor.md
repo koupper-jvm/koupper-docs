@@ -122,3 +122,33 @@ val logs = supervisor.logs(
 - `scripts/local-status.kts`
 - `scripts/local-down.kts`
 - `scripts/local-logs.kts`
+
+
+## CLI discovery
+
+```bash
+koupper provider info process-supervisor
+```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.process.ProcessSupervisor
+import com.koupper.container.app
+
+@Export
+val startService: () -> String = {
+    val supervisor = app.getInstance(ProcessSupervisor::class)
+    
+    val process = supervisor.start(
+        name = "my-api",
+        command = listOf("java", "-jar", "app.jar"),
+        workingDir = "/opt/myapp",
+        env = mapOf("PORT" to "8080")
+    )
+    
+    if (supervisor.isRunning("my-api")) "Service running (PID: ${process.pid})"
+    else "Service failed to start"
+}
+```

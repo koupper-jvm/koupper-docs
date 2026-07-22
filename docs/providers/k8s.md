@@ -42,3 +42,25 @@ if (result.exitCode != 0) { /* handle failure */ }
 ```bash
 koupper provider info k8s
 ```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.k8s.K8sProvider
+import com.koupper.container.app
+
+@Export
+val deployAndVerify: () -> String = {
+    val k8s = app.getInstance(K8sProvider::class)
+    
+    k8s.apply("deployment/api.yaml")
+    
+    val rollout = k8s.rolloutStatus("deployment/api")
+    if (rollout.timedOut) return@deployAndVerify "Rollout timed out"
+    if (rollout.exitCode != 0) return@deployAndVerify "Rollout failed: ${rollout.stderr}"
+    
+    val pods = k8s.getPods(namespace = "default", selector = "app=api")
+    "Deployed. Running pods: ${pods.stdout.lines().size}"
+}
+```

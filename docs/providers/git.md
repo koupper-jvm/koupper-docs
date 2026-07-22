@@ -42,3 +42,34 @@ if (result.exitCode != 0) { /* handle failure */ }
 ```bash
 koupper provider info git
 ```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.git.GitClient
+import com.koupper.container.app
+
+@Export
+val autoCommit: () -> String = {
+    val git = app.getInstance(GitClient::class)
+    val repo = "/path/to/repo"
+    
+    git.add(repo, ".")
+    val status = git.status(repo)
+    
+    if (status.stdout.isNotBlank()) {
+        git.commit(repo, "auto: deploy snapshot")
+        "Committed changes"
+    } else {
+        "Nothing to commit"
+    }
+}
+
+@Export
+val checkBranch: () -> String = {
+    val git = app.getInstance(GitClient::class)
+    val result = git.branch("/path/to/repo")
+    result.stdout.trim()
+}
+```

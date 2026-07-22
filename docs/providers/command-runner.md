@@ -59,3 +59,33 @@ val result = runner.runChecked(
   - `shellCommand`, or
   - `executable` + `args`
 - `runChecked` throws if exit code is non-zero.
+
+
+## CLI discovery
+
+```bash
+koupper provider info command-runner
+```
+
+## Usage example
+
+```kotlin
+import com.koupper.shared.annotations.Export
+import com.koupper.providers.command.CommandRunner
+import com.koupper.container.app
+
+@Export
+val runBuild: () -> String = {
+    val runner = app.getInstance(CommandRunner::class)
+    
+    val result = runner.shellCommand(
+        command = "npm run build",
+        workingDir = "/path/to/project",
+        timeoutSeconds = 120,
+        dryRun = false
+    )
+    
+    if (result.exitCode != 0) "[ERR] Build failed: ${result.stderr}"
+    else "Build succeeded in ${result.durationMs}ms"
+}
+```
