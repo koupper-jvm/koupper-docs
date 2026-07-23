@@ -1,6 +1,7 @@
 # Getting Started
 
-> Current community release: **v7.2.0** ([GitHub Release](https://github.com/koupper-jvm/koupper/releases/tag/v7.2.0)).
+> Current community release: **v7.2.0** ([GitHub Release](https://github.com/koupper-jvm/koupper/releases/tag/v7.2.0)).  
+> **Coming in v7.2.1:** install also publishes `com.koupper:octopus-api` to **mavenLocal** for Gradle modules.
 
 This guide gets Koupper running quickly with the current local-first scaffolding flow.
 
@@ -88,11 +89,29 @@ If the doctor reports failures, run install again with `--force`.
 Both installers provision:
 
 - `~/.koupper/bin`
-- `~/.koupper/libs`
+- `~/.koupper/libs` — fat **runtime** `octopus.jar` (daemon / `koupper run`)
 - `~/.koupper/helpers`
 - `~/.koupper/logs`
 - `~/.koupper/templates/model-project`
 - `~/.koupper/catalog/providers.json`
+- **mavenLocal** — light **`com.koupper:octopus-api:<version>`** for compiling modules (not the fat jar)
+
+### Using Octopus from a Gradle module
+
+After install (v7.2.1+):
+
+```gradle
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation("com.koupper:octopus-api:7.2.1")
+}
+```
+
+Do **not** put `~/.koupper/libs/octopus.jar` on the compile classpath — that fat jar is only for the OS-level daemon.
 
 ## 2) Verify CLI
 
