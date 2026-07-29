@@ -1,10 +1,11 @@
 name: Docs Deploy
 
 # Publishes VitePress → s3://koupper-docs + CloudFront invalidation.
-# Requires repo secrets:
+#
+# Repo secrets (Settings → Secrets and variables → Actions) — EXACT names:
 #   AWS_ACCESS_KEY_ID
 #   AWS_SECRET_ACCESS_KEY
-# IAM user needs s3:Put/Delete on koupper-docs + cloudfront:CreateInvalidation on E1EOMSACJRDKWH.
+# IAM: koupper-framework-docs-deployer (s3://koupper-docs + CF E1EOMSACJRDKWH)
 
 on:
   push:
@@ -22,14 +23,29 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      AWS_REGION: us-east-1
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Verify AWS secrets are present
+        run: |
+          set -euo pipefail
+          if [ -z "${AWS_ACCESS_KEY_ID:-}" ] || [ -z "${AWS_SECRET_ACCESS_KEY:-}" ]; then
+            echo "::error::Missing AWS secrets. Add repository secrets named exactly AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY (Actions → Secrets). Do not use Environment secrets unless this job declares that environment."
+            exit 1
+          fi
+          echo "AWS_ACCESS_KEY_ID is set (len=${#AWS_ACCESS_KEY_ID})"
+          echo "AWS_SECRET_ACCESS_KEY is set (len=${#AWS_SECRET_ACCESS_KEY})"
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
           cache-dependency-path: package-lock.json
 
@@ -39,18 +55,12 @@ jobs:
       - name: Build docs
         run: npm run docs:build
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-
       - name: Sync to S3
         run: |
           set -euo pipefail
           DIST="docs/.vitepress/dist"
           test -d "$DIST"
+          aws sts get-caller-identity
           aws s3 sync "$DIST" "s3://koupper-docs" --delete
 
       - name: Invalidate CloudFront
