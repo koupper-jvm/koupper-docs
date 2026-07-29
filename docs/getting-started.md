@@ -169,3 +169,14 @@ export KOUPPER_OCTOPUS_TOKEN="your-token"
 - [`module` command](/commands/module)
 - [Architecture Overview](/architecture/)
 - [Provider Catalog](/providers/)
+
+## Contributing
+
+Want to improve the framework or the docs?
+
+| Change | Branch from | Merge path | How it ships |
+|--------|-------------|------------|--------------|
+| Engine / CLI | `develop` | PR → `develop` | Maintainer tags `vX.Y.Z` on [koupper](https://github.com/koupper-jvm/koupper) |
+| Docs (this site) | `develop` | PR → `develop`, then `develop` → `main` | Push to `main` auto-deploys here |
+
+Full guide: [CONTRIBUTING.md](https://github.com/koupper-jvm/koupper/blob/develop/CONTRIBUTING.md) in the engine repo.
