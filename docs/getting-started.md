@@ -1,7 +1,7 @@
 # Getting Started
 
-> Current community release: **v7.2.0** ([GitHub Release](https://github.com/koupper-jvm/koupper/releases/tag/v7.2.0)).  
-> **Coming in v7.2.1:** install also publishes `com.koupper:octopus-api` to **mavenLocal** for Gradle modules.
+> Current community release: **v7.2.1** ([GitHub Release](https://github.com/koupper-jvm/koupper/releases/tag/v7.2.1)).  
+> Install publishes `com.koupper:octopus-api` to **mavenLocal** for Gradle modules. Re-run with `--force` to upgrade.
 
 This guide gets Koupper running quickly with the current local-first scaffolding flow.
 
@@ -22,6 +22,8 @@ This guide gets Koupper running quickly with the current local-first scaffolding
 
 ### Option A: End users (standalone, no repo clone)
 
+Same command for **first install** and **upgrade** — `--force` replaces runtime jars and republishes `octopus-api` to mavenLocal:
+
 ```bash
 curl -L -o install-standalone.kts https://github.com/koupper-jvm/koupper/releases/latest/download/install-standalone.kts
 kotlinc -script install-standalone.kts -- --force
@@ -34,13 +36,15 @@ Invoke-WebRequest -Uri "https://github.com/koupper-jvm/koupper/releases/latest/d
 kotlinc -script .\install-standalone.kts -- --force
 ```
 
-Health check:
+Then verify:
 
 ```bash
+koupper -v
 kotlinc -script install-standalone.kts -- --doctor
 ```
 
 ```powershell
+koupper -v
 kotlinc -script .\install-standalone.kts -- --doctor
 ```
 
