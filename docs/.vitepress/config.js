@@ -1,6 +1,6 @@
 module.exports = {
   title: "Koupper",
-  description: "Event-driven Kotlin runtime + CLI for production scripting",
+  description: "Kotlin runtime + CLI for production scripting. Current release: v7.2.1.",
   head: [
     ["link", { rel: "icon", href: "/koupper-logo.svg" }],
   ],

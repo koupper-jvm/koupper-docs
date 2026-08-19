@@ -1,7 +1,9 @@
 # Getting Started
 
-> Current community release: **v7.2.1** ([GitHub Release](https://github.com/koupper-jvm/koupper/releases/tag/v7.2.1)).  
+> Current community release: **v7.2.1** ([GitHub Release](https://github.com/koupper-jvm/koupper/releases/tag/v7.2.1)).
 > Install publishes `com.koupper:octopus-api` to **mavenLocal** for Gradle modules. Re-run with `--force` to upgrade.
+>
+> **Distribution:** GitHub Releases + mavenLocal. Koupper is **not** on Maven Central.
 
 This guide gets Koupper running quickly with the current local-first scaffolding flow.
 

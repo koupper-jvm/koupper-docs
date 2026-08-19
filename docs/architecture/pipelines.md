@@ -1,8 +1,11 @@
 # Pipelines
 
-Koupper supports multi-stage agent pipelines via `@Scheduled(chain=...)`. Each stage is a separate `.kts` script that runs in sequence, with output from one stage passed as input to the next.
+V7 has two pipeline styles. Prefer the programmatic one for new modules:
 
-## Quick start
+- **In-process (V7):** `ScriptExecutor.runPipeline(listOf(::step1, ::step2.dependsOn(::step1)), async = false)` and `::fn.asJob(...).dispatchToQueue()`. See [`koupper job`](/commands/job).
+- **Scheduled chain (below):** `@Scheduled(chain = "B.kts > C.kts")` still works for agent scripts the worker runs as a sequence of `koupper run` subprocesses.
+
+## Quick start (`@Scheduled` chain)
 
 ```kotlin
 // RssFeedAgent.kts — the trigger script
