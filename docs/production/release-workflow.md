@@ -4,9 +4,9 @@ Koupper uses independent artifact tracks and stable tags.
 
 ## Artifact versions
 
-- Octopus runtime (`koupper`): `octopus-v<version>`
-- CLI (`koupper-cli`): `cli-v<version>`
-- optional monorepo snapshot: `koupper-v<version>`
+Since v7, engine and CLI share one semver. Tag **`vX.Y.Z`** on [koupper-jvm/koupper](https://github.com/koupper-jvm/koupper) (current: **v7.2.1**). That tag publishes install assets (`install-standalone.kts`, `octopus.jar`, `koupper-cli.jar`, `octopus-api.jar`).
+
+Legacy split tags (`octopus-v6.x`, `cli-v4.x`, `koupper-v1.x-monorepo`) are superseded. Do not create new ones.
 
 ## Recommended release steps
 
@@ -34,7 +34,7 @@ Koupper uses independent artifact tracks and stable tags.
   - `koupper/providers: ProviderCatalogConsistencyTest`
   - `koupper/providers: CommandRunnerServiceProviderTest`
   - `koupper-cli: ProviderCommandCatalogPathTest`
-- `Docs Quality` (repo `koupper-document`)
+- `Docs Quality` (repo `koupper-docs`)
   - `npm run docs:check`
   - `npm run docs:build`
 
@@ -59,7 +59,7 @@ Windows PowerShell:
 ./scripts/ci/local-quick-checks.ps1 -Target all
 ```
 
-Docs-only change from `koupper-document`:
+Docs-only change from `koupper-docs`:
 
 ```bash
 npm run docs:check && npm run docs:build

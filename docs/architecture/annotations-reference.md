@@ -138,6 +138,8 @@ val digest: () -> Unit = {
 }
 ```
 
+V7 in-process alternative (preferred for compiled modules): `::step.asJob(...).dispatchToQueue()` and `ScriptExecutor.runPipeline(...)`. See [`koupper job`](/commands/job) and [Pipelines](/architecture/pipelines).
+
 ### Function orchestration complements
 
 #### `@Schedule`
