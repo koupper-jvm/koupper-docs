@@ -40,13 +40,13 @@ koupper module
 Example sections from a healthy V7 module:
 
 ```text
-📦 Octopus dependency: octopus-7.2.0 (build.gradle)
+📦 Octopus dependency: octopus-7.2.1 (build.gradle)
 
 📦 Module Setup Info:
   - Target        : /path/to/my-app
   - Version       : 1.0.0
   - Base package  : com.example.app
-  - Octopus       : com.koupper:octopus:7.2.0 (build.gradle)
+  - Octopus       : com.koupper:octopus-api:7.2.1 (build.gradle)
 
   - Routes (V7)  :
       GET  /health
